@@ -31,8 +31,11 @@ Dynamic Data:
 
 Static Data:
 * HVAC appliance efficiency
+  * Every appliance category has its own measure e.g. SEER. 
 * Appliance annual energy usage
+  * Refrigerators and dishwashers and use what is on the tag.
 * Zip code latitude and longitude
+  * [Geo Names](https://download.geonames.org/export/zip/ )
 * Home R values
 * ACH values
 * Water usage averages
