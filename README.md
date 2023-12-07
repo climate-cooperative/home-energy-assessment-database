@@ -21,10 +21,10 @@ Dynamic Data:
 * Electricity Utility Price (at a state level)
 * Other Fuel Prices (Propane, Fuel Oil, Kerosene, Wood, Wood Pellets) (at a national average level)
   * [EIA Open Data](https://www.eia.gov/opendata/)
-    * Natural Gas
-    * Propane
-    * Electricity
-    * Petroleum (Heating Oil)
+    * Natural Gas - Monthly by State
+    * Electricity - Monthly by State
+    * Propane - Weekly by State
+    * Heating Oil - Weekly by State
   * We'd like to use APIv2 to connect pull this data by state as frequently as it is updated.
 
 Static Data:
