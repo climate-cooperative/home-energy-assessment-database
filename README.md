@@ -15,7 +15,8 @@ Documentation, conversions, and data supporting Zwell's home energy audit and ca
 
 Dynamic Data:
 * Heating Degree Days & Cooling Degree Days (at a weather station level)
-* Ground Water Temperature (or Surface Water Temperature) (at a water site level)
+* Ground Water Temperature (or Surface Water Temperature) (at a water site level
+  * [USGS Water Service API](https://waterdata.usgs.gov/blog/dataretrieval/)
 * Electricity Production Sources (at a state level)
 * Natural Gas Utility Price (at a state level)
 * Electricity Utility Price (at a state level)
