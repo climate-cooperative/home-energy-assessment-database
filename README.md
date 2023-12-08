@@ -37,5 +37,8 @@ Static Data:
 * Zip code latitude and longitude
   * [Geo Names](https://download.geonames.org/export/zip/ )
 * Home R values
+  * We'd like a better source for this, it is a compilation of a variety of online sources for now.
 * ACH values
+  * 
 * Water usage averages
+  * [Florida Solar Energy Center](https://www.fsec.ucf.edu/en/publications/pdf/fsec-pf-464-15.pdf)
