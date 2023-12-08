@@ -15,7 +15,7 @@ Documentation, conversions, and data supporting Zwell's home energy audit and ca
 
 Dynamic Data:
 * Heating Degree Days & Cooling Degree Days (at a weather station level)
-  * [USGS Water Service API](https://waterdata.usgs.gov/blog/dataretrieval/) 
+  * We pull the historical temperature data by weather station from the [GHCNd](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)
 * Ground Water Temperature (or Surface Water Temperature) (at a water site level
   * [USGS Water Service API](https://waterdata.usgs.gov/blog/dataretrieval/)
 * Electricity Production Sources (at a state level)
