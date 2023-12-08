@@ -39,6 +39,6 @@ Static Data:
 * Home R values
   * We'd like a better source for this, it is a compilation of a variety of online sources for now.
 * ACH values
-  * 
+  * We'd like a better source for this, for now we've used data from a home energy inspector.
 * Water usage averages
   * [Florida Solar Energy Center](https://www.fsec.ucf.edu/en/publications/pdf/fsec-pf-464-15.pdf)
