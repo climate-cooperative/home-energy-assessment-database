@@ -16,6 +16,7 @@ Documentation, conversions, and data supporting Zwell's home energy audit and ca
 Dynamic Data:
 * Heating Degree Days & Cooling Degree Days (at a weather station level)
   * We pull the historical temperature data by weather station from the [GHCNd](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)
+  * We use an assumption around a 65° internal home temperature to determine heat degree and cooling degree days. We arrived at this number based on [EIA's definition](https://www.eia.gov/energyexplained/units-and-calculators/degree-days.php#:~:text=Heating%20degree%20days%20(HDDs)%20are,%C2%B0F%20has%2025%20HDDs).
 * Ground Water Temperature (or Surface Water Temperature) (at a water site level
   * [USGS Water Service API](https://waterdata.usgs.gov/blog/dataretrieval/)
 * Electricity Production Sources (at a state level)
