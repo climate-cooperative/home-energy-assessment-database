@@ -9,6 +9,7 @@ Documentation, conversions, and data supporting Zwell's home energy audit and ca
 * Solar insolation logic
 * Heating & cooling logic
 * Water heating logic
+* Lighting energy logic
 * Energy generation logic
 * CO2 emissions logic
 * Operating cost logic
