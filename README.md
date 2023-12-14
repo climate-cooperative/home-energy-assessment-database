@@ -35,19 +35,19 @@ Static Data:
   * Every appliance category has its own measure e.g. SEER and this is sourced from [AHRI](https://www.ahridirectory.org/) using a median rating for each product type and fuel type.
 * Appliance annual energy usage
   * We are tyring to source the median efficiency from the [FTC's EnergyGuide](https://www.ftc.gov/news-events/topics/tools-consumers/energyguide-labels)
-   * Boilers
-   * Ceiling Fans
-   * Central Air Conditioners
-   * Clothes Washers
-   * Dishwashers
-   * Freezers
-   * Furnaces
-   * Heat Pumps
-   * Pool Heaters
-   * Refrigerators
-   * Televisions
-   * Water Heaters
-   * Room and Portable Air Aonditioners 
+    * Boilers
+    * Ceiling Fans
+    * Central Air Conditioners
+    * Clothes Washers
+    * Dishwashers
+    * Freezers
+    * Furnaces
+    * Heat Pumps
+    * Pool Heaters
+    * Refrigerators
+    * Televisions
+    * Water Heaters
+    * Room and Portable Air Aonditioners 
 * Zip code latitude and longitude
   * [Geo Names](https://download.geonames.org/export/zip/ )
 * Home R values
