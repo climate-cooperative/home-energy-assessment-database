@@ -57,7 +57,7 @@ Static Data:
 * Zip code latitude and longitude
   * [Geo Names](https://download.geonames.org/export/zip/ )
 * Home R values
-  * We'd like a better source for this, it is a compilation of a variety of online sources for now.
+  * [ASTM](https://www.astm.org/products-services/standards-and-publications/standards/bos-standards.html?volume=04.06&year=2023&month=november)
 * ACH values
   * We'd like a better source for this, for now we've used data from a home energy inspector.
 * Water usage averages
