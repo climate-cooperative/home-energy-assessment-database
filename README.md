@@ -34,7 +34,7 @@ Static Data:
 * Heating, Cooling, Water Heating
   * Every appliance category has its own measure e.g. SEER and this is sourced from [AHRI](https://www.ahridirectory.org/) using a median rating for each product type and fuel type.
 * Appliance annual energy usage
-  * We are tyring to source the median efficiency from the [FTC's EnergyGuide](https://www.ftc.gov/news-events/topics/tools-consumers/energyguide-labels)
+  * We are tyring to source the median efficiency from the [FTC's EnergyGuide](https://www.ftc.gov/news-events/topics/tools-consumers/energyguide-labels) for the following:
     * Boilers
     * Ceiling Fans
     * Central Air Conditioners
@@ -47,7 +47,12 @@ Static Data:
     * Refrigerators
     * Televisions
     * Water Heaters
-    * Room and Portable Air Aonditioners 
+    * Room and Portable Air Aonditioners
+    * Light Bulbs
+  * We don't have create documentation on the efficiency sources for the following appliances and need help sourcing:
+    * Cooktops
+    * Ovens
+    * Dryers  
 * Zip code latitude and longitude
   * [Geo Names](https://download.geonames.org/export/zip/ )
 * Home R values
