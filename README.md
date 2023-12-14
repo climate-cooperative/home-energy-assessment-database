@@ -31,8 +31,8 @@ Dynamic Data:
   * We'd like to use APIv2 to connect pull this data by state as frequently as it is updated.
 
 Static Data:
-* HVAC appliance efficiency
-  * Every appliance category has its own measure e.g. SEER. 
+* Heating, Cooling, Water Heating
+  * Every appliance category has its own measure e.g. SEER and this is sourced from [AHRI](https://www.ahridirectory.org/) using a median rating for each product type and fuel type.
 * Appliance annual energy usage
   * Refrigerators and dishwashers and use what is on the tag.
 * Zip code latitude and longitude
