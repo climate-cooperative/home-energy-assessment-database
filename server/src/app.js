@@ -1,21 +1,17 @@
 /*
-
   This is the main file of the server.
   It contains the code to start the server and connect to MongoDB Atlas.
   It also contains the code to use the API routes.
-
 */
-
 const express = require('express');
 const cors = require('cors');
 const { connectToDatabase } = require('./config/mongodb');
 const apiRoutes = require('./routes/api');
-const scheduler = require('./jobs/scheduler');
+// const scheduler = require('./jobs/scheduler');
 
 require('dotenv').config();
 
 const app = express();
-
 // Middleware
 app.use(cors(
   {
@@ -29,7 +25,7 @@ app.use(express.json());
 connectToDatabase();
 
 // Start the scheduled task
-scheduler(); 
+// scheduler(); 
 
 // Use API routes
 app.use('/api', apiRoutes);

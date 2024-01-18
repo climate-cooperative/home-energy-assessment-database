@@ -1,10 +1,8 @@
 /*
-
   This file contains the code to connect to your MongoDB deployment.
   It exports two things:
     1. The MongoClient object
     2. A function to test the connection of the database
-
 */
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
