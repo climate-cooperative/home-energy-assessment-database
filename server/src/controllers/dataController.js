@@ -3,22 +3,20 @@
     It exports a single function for each route.
 */
 const { client } = require('../config/mongodb');
+const { connectToCollection, closeConnection } = require('../config/mongodb');
 
 // @desc    appliances route
 // @route   GET /api/appliances
 // @access  Public
 const get_appliances = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('test');
-        const collection = db.collection('Appliances');
-
+        const collection = await connectToCollection('test', 'Appliances');
         const appliances = await collection.find().toArray();
         res.json(appliances);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -27,16 +25,13 @@ const get_appliances = async (req, res) => {
 // @access  Public
 const get_hvac_appliances = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('test');
-        const collection = db.collection('HVAC Appliances');
-
-        const appliances = await collection.find().toArray();
-        res.json(appliances);
+        const collection = await connectToCollection('test', 'HVAC Appliances');
+        const HVAC_appliances = await collection.find().toArray();
+        res.json(HVAC_appliances);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -46,16 +41,13 @@ const get_hvac_appliances = async (req, res) => {
 // @access  Public
 const get_home_decades = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('test'); 
-        const collection = db.collection('Home Decades'); 
-
-        const appliances = await collection.find().toArray();
-        res.json(appliances);
+        const collection = await connectToCollection('test', 'Home Decades');
+        const home_decades = await collection.find().toArray();
+        res.json(home_decades);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -64,16 +56,13 @@ const get_home_decades = async (req, res) => {
 // @access  Public
 const get_home_type = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('test'); 
-        const collection = db.collection('Home Type'); 
-
-        const appliances = await collection.find().toArray();
-        res.json(appliances);
+        const collection = await connectToCollection('test', 'Home Type');
+        const home_types = await collection.find().toArray();
+        res.json(home_types);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -82,16 +71,13 @@ const get_home_type = async (req, res) => {
 // @access  Public
 const get_state_table = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('Home_Energy_Data');
-        const collection = db.collection('State Data'); 
-
-        const appliances = await collection.find().toArray();
-        res.json(appliances);
+        const collection = await connectToCollection('test', 'State Data');
+        const state_table = await collection.find().toArray();
+        res.json(state_table);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -100,10 +86,7 @@ const get_state_table = async (req, res) => {
 // @access  Public
 const get_state = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('Home_Energy_Data'); 
-        const collection = db.collection('State Data'); 
-
+        const collection = await connectToCollection('Home_Energy_Data', 'State Data');
         // check whether state or state abbreviation was passed in
         // if state abbreviation, convert to state name
         if (req.params.state.length === 2) {
@@ -118,7 +101,7 @@ const get_state = async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -127,16 +110,13 @@ const get_state = async (req, res) => {
 // @access  Public
 const get_zip_table = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('Home_Energy_Data'); 
-        const collection = db.collection('Zip Code Data'); 
-
-        const appliances = await collection.find().toArray();
-        res.json(appliances);
+        const collection = await connectToCollection('Home_Energy_Data', 'Zip Code Data');
+        const zip_table = await collection.find().toArray();
+        res.json(zip_table);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -145,16 +125,13 @@ const get_zip_table = async (req, res) => {
 // @access  Public
 const get_zipcode = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('Home_Energy_Data'); 
-        const collection = db.collection('Zip Code Data'); 
-
+        const collection = await connectToCollection('Home_Energy_Data', 'Zip Code Data');
         const zipcode = await collection.findOne({ Zipcode: req.params.zipcode });
         res.json(zipcode);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -163,16 +140,13 @@ const get_zipcode = async (req, res) => {
 // @access  Public
 const get_state_zipcodes = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('Home_Energy_Data'); 
-        const collection = db.collection('Zip Code Data'); 
-
+        const collection = await connectToCollection('Home_Energy_Data', 'Zip Code Data');
         const zipcode = await collection.find({ State: req.params.state }).toArray();
         res.json(zipcode);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 
@@ -181,16 +155,13 @@ const get_state_zipcodes = async (req, res) => {
 // @access  Public
 const get_wood_table = async (req, res) => {
     try {
-        await client.connect();
-        const db = client.db('Home_Energy_Data'); 
-        const collection = db.collection('Wood National Prices'); 
-
-        const appliances = await collection.find().toArray();
-        res.json(appliances);
+        const collection = await connectToCollection('Home_Energy_Data', 'Wood Table');
+        const wood = await collection.find().toArray();
+        res.json(wood);
     } catch (err) {
         res.status(500).json({ message: err.message });
     } finally {
-        await client.close();
+        await closeConnection();
     }
 }
 

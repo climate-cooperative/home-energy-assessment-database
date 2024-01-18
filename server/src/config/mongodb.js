@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 
 async function connectToDatabase() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    // Connect the client to the server
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
@@ -32,5 +32,28 @@ async function connectToDatabase() {
   }
 }
 
+async function connectToCollection(dbname, collectionName) {
+  try {
+    // Connect the client to the server	
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    const collection = await client.db(dbname).collection(collectionName);
 
-module.exports = { client, connectToDatabase };
+    return collection;
+  } 
+  catch (err) {
+    console.log(err);
+  }
+}
+
+async function closeConnection() {
+  try {
+    // Connect the client to the server	
+    await client.close();
+  } 
+  catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = { connectToDatabase, connectToCollection, closeConnection };
