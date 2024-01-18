@@ -9,6 +9,7 @@ Documentation, conversions, and data supporting Zwell's home energy audit and ca
 * Solar insolation logic
 * Heating & cooling logic
 * Water heating logic
+* Lighting energy logic
 * Energy generation logic
 * CO2 emissions logic
 * Operating cost logic
@@ -31,15 +32,35 @@ Dynamic Data:
   * We'd like to use APIv2 to connect pull this data by state as frequently as it is updated.
 
 Static Data:
-* HVAC appliance efficiency
-  * Every appliance category has its own measure e.g. SEER. 
+* Heating, Cooling, Water Heating
+  * Every appliance category has its own measure e.g. SEER and this is sourced from [AHRI](https://www.ahridirectory.org/) using a median rating for each product type and fuel type.
 * Appliance annual energy usage
-  * Refrigerators and dishwashers and use what is on the tag.
+  * We are tyring to source the median efficiency from the [FTC's EnergyGuide](https://www.ftc.gov/news-events/topics/tools-consumers/energyguide-labels) for the following:
+    * Boilers
+    * Ceiling Fans
+    * Central Air Conditioners
+    * Clothes Washers
+    * Dishwashers
+    * Freezers
+    * Furnaces
+    * Heat Pumps
+    * Pool Heaters
+    * Refrigerators
+    * Televisions
+    * Water Heaters
+    * Room and Portable Air Aonditioners
+    * Light Bulbs
+  * We don't have create documentation on the efficiency sources for the following appliances and need help sourcing:
+    * Cooktops
+    * Ovens
+    * Dryers  
 * Zip code latitude and longitude
   * [Geo Names](https://download.geonames.org/export/zip/ )
 * Home R values
-  * We'd like a better source for this, it is a compilation of a variety of online sources for now.
+  * International Energy Conservation Code
 * ACH values
+  * ASHRAE?
+  * https://basc.pnnl.gov/information/infiltration-meets-ach50-requirements
   * We'd like a better source for this, for now we've used data from a home energy inspector.
 * Water usage averages
   * [Florida Solar Energy Center](https://www.fsec.ucf.edu/en/publications/pdf/fsec-pf-464-15.pdf)
