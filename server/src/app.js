@@ -5,10 +5,9 @@
 */
 const express = require('express');
 const cors = require('cors');
-const { connectToDatabase } = require('./config/mongodb');
 const apiRoutes = require('./routes/api');
-
-require('dotenv').config();
+const { testConnectionToDB } = require('./config/mongodb');
+const { port } = require('./static/constants');
 
 const app = express();
 // Middleware
@@ -20,14 +19,13 @@ app.use(cors(
 ));
 app.use(express.json());
 
-// Connect to MongoDB Atlas
-connectToDatabase();
+// Test connection to MongoDB Atlas
+testConnectionToDB();
 
 // Use API routes
 app.use('/api', apiRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });

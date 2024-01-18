@@ -2,7 +2,6 @@
     This file contains the controller functions for the data routes.
     It exports a single function for each route.
 */
-const { client } = require('../config/mongodb');
 const { connectToCollection, closeConnection } = require('../config/mongodb');
 
 // @desc    appliances route

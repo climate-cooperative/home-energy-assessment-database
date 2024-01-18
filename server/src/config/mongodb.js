@@ -6,12 +6,10 @@
 */
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-
-require('dotenv').config();
-const uri = `mongodb+srv://${process.env.API_USER}:${process.env.API_KEY}@${process.env.MONGO_ENDPOINT}/?retryWrites=true&w=majority`;
+const { mongodb_connection } = require('../static/constants');
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
+const client = new MongoClient(mongodb_connection, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -19,16 +17,36 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function connectToDatabase() {
+async function testConnectionToDB() {
   try {
-    // Connect the client to the server
     await client.connect();
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
-    // Ensures that the client will close when you finish/error
     await client.close();
+  }
+}
+
+async function appendToStateArrays(state, data){
+  try {
+    const collection = await connectToCollection('Home_Energy_Data', 'State Data');
+    // append data to the state emissions array
+    await collection.updateOne(
+      { Abbreviation: state },
+      { $push: 
+        { 
+          'State Emissions': data['State Emissions'],
+          'State Energy Costs': data['State Energy Costs'],
+          'State Energy Breakdown': data['State Energy Breakdown']
+        } 
+      },
+    );
+  } 
+  catch (err) {
+    console.log(err);
+  } finally {
+    await closeConnection();
   }
 }
 
@@ -38,7 +56,6 @@ async function connectToCollection(dbname, collectionName) {
     await client.connect();
     // Send a ping to confirm a successful connection
     const collection = await client.db(dbname).collection(collectionName);
-
     return collection;
   } 
   catch (err) {
@@ -48,7 +65,6 @@ async function connectToCollection(dbname, collectionName) {
 
 async function closeConnection() {
   try {
-    // Connect the client to the server	
     await client.close();
   } 
   catch (err) {
@@ -56,4 +72,9 @@ async function closeConnection() {
   }
 }
 
-module.exports = { connectToDatabase, connectToCollection, closeConnection };
+module.exports = { 
+  testConnectionToDB,
+  connectToCollection,
+  closeConnection,
+  appendToStateArrays
+};
