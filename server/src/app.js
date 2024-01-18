@@ -10,7 +10,6 @@ const express = require('express');
 const cors = require('cors');
 const { connectToDatabase } = require('./config/mongodb');
 const apiRoutes = require('./routes/api');
-const scheduler = require('./jobs/scheduler');
 
 require('dotenv').config();
 
@@ -27,9 +26,6 @@ app.use(express.json());
 
 // Connect to MongoDB Atlas
 connectToDatabase();
-
-// Start the scheduled task
-scheduler(); 
 
 // Use API routes
 app.use('/api', apiRoutes);
