@@ -70,7 +70,7 @@ const get_home_type = async (req, res) => {
 // @access  Public
 const get_state_table = async (req, res) => {
     try {
-        const collection = await connectToCollection('test', 'State Data');
+        const collection = await connectToCollection('Home_Energy_Data', 'State Data');
         const state_table = await collection.find().toArray();
         res.json(state_table);
     } catch (err) {

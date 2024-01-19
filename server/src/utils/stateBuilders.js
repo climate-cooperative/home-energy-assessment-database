@@ -2,11 +2,12 @@ const fetch = require('node-fetch');
 const {
     electric_url,
     breakdown_url,
-    states,
-    fuelTypeMapping,
     url_energy_cost_mapping
 } = require('../static/constants');
-const conversions = require('../static/conversions');
+const {
+    energy_conversions,
+    fuelTypeMapping
+} = require('../static/conversions');
 const { 
     emissionSchema,
     costSchema,
@@ -25,7 +26,7 @@ function buildStateEmissions(stateData) {
                 'co2-rate-lbs-mwh': entry['co2-rate-lbs-mwh'],
             });
             stateData[Entry.stateid]['State Emissions']['CO2 lbs/MHW'] = Entry['co2-rate-lbs-mwh'];
-            stateData[Entry.stateid]['State Emissions']['CO2 lbs/BTU'] = Entry['co2-rate-lbs-mwh'] / conversions['Electricity'];
+            stateData[Entry.stateid]['State Emissions']['CO2 lbs/BTU'] = Entry['co2-rate-lbs-mwh'] / energy_conversions['Electricity'];
             // Need to figure out how to calculate this
             // stateData[state]['State Emissions']['CO2 Net Emission Estimate'] = co2_thousand_metric_tons; 
             stateData[state]['State Emissions']['Date'] = Entry.period;
@@ -54,7 +55,7 @@ function buildStateEnergyCosts(stateData) {
                         price: entry.value,
                     });
                 // map to the correct state
-                stateData[Entry.abbr]['State Energy Costs'][url_energy_cost_mapping[url]] = Entry.price / conversions[Entry.product];
+                stateData[Entry.abbr]['State Energy Costs'][url_energy_cost_mapping[url]] = Entry.price / energy_conversions[Entry.product];
             });
         }).catch((err) => {
             console.log(err);
@@ -75,23 +76,14 @@ function buildStateEnergyCosts(stateData) {
 // Define the function to build the state energy breakdown data
 function buildStateEnergyBreakdown(stateData) {
     // create dict for all renewable energy
-    let all_renewable = {};
-    states.forEach((state) => {
-        all_renewable[state] = 0;
-    });
-
     getFromAPI(breakdown_url).then((data) => {
         data.series.forEach((entry) => {
             let Entry = new breakdownSchema({
                 period: entry.period,
                 location: entry.location,
                 fueltypeid: entry.fueltypeid,
-                'consumption-for-eg-btu': entry['consumption-for-eg-btu'],
+                'consumption-for-eg-btu': entry['consumption-for-eg-btu'] || 0,
             });
-            if (Entry.fueltypeid == 'AOR') {
-                all_renewable[state] = Entry['consumption-for-eg-btu'];
-                return;
-            }
             let fuelType = fuelTypeMapping[Entry.fuelAbbr];
             stateData[Entry.location]['State Energy Breakdown'][fuelType] = Entry['consumption-for-eg-btu'];
         });
@@ -107,6 +99,7 @@ function buildStateEnergyBreakdown(stateData) {
         let month = date.getMonth();
         let dateString = year + '-' + month;
         let otherRenewable = otherRenewableCalculation(state);
+        delete state['State Energy Breakdown']['All Renewable'];
         state['State Energy Breakdown']['Other Renewable'] = otherRenewable;
         state['State Energy Breakdown']['Date'] = dateString;
         state['State Energy Breakdown']['Units'] = 'million MMBtu';
@@ -116,7 +109,7 @@ function buildStateEnergyBreakdown(stateData) {
 function otherRenewableCalculation(state) {
     let solar = state['State Energy Breakdown']['Solar'] || 0;
     let wind = state['State Energy Breakdown']['Wind'] || 0;
-    let all_renewable = all_renewable[state];
+    let all_renewable = state['State Energy Breakdown']['All Renewable'] || 0;
     return (all_renewable - solar - wind) > 0 ? (all_renewable - solar - wind) : 0;
 }
 
