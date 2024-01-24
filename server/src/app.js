@@ -5,7 +5,6 @@
 */
 const express = require('express');
 const cors = require('cors');
-const { connectToDatabase } = require('./config/mongodb');
 const apiRoutes = require('./routes/api');
 
 require('dotenv').config();
@@ -19,9 +18,6 @@ app.use(cors(
   }
 ));
 app.use(express.json());
-
-// Connect to MongoDB Atlas
-connectToDatabase();
 
 // Use API routes
 app.use('/api', apiRoutes);

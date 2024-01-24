@@ -4,56 +4,30 @@
     1. The MongoClient object
     2. A function to test the connection of the database
 */
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
+/*
+  This file contains the code to connect to your MongoDB deployment.
+  It exports two things:
+    1. The MongoClient object
+    2. A function to test the connection of the database
+*/
+const mongoose = require('mongoose');
 require('dotenv').config();
-const uri = `mongodb+srv://${process.env.API_USER}:${process.env.API_KEY}@${process.env.MONGO_ENDPOINT}/?retryWrites=true&w=majority`;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
+const mongodb_connection = `mongodb+srv://${process.env.API_USER}:${process.env.API_KEY}@${process.env.MONGO_ENDPOINT}?retryWrites=true&w=majority`;
+
+console.log(mongodb_connection);
+
+// Connect to MongoDB Atlas
+const conn = mongoose.createConnection(mongodb_connection, { useNewUrlParser: true, useUnifiedTopology: true });
+
+conn.on('error', console.error.bind(console, 'connection error:'));
+conn.once('open', () => {
+  console.log('Connected to MongoDB Atlas');
+  // list dbs
+  conn.db.admin().listDatabases(function (err, dbs) {
+      console.log(dbs.databases);
+  });
 });
 
-async function connectToDatabase() {
-  try {
-    // Connect the client to the server
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
+module.exports = conn;
 
-async function connectToCollection(dbname, collectionName) {
-  try {
-    // Connect the client to the server	
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    const collection = await client.db(dbname).collection(collectionName);
-
-    return collection;
-  } 
-  catch (err) {
-    console.log(err);
-  }
-}
-
-async function closeConnection() {
-  try {
-    // Connect the client to the server	
-    await client.close();
-  } 
-  catch (err) {
-    console.log(err);
-  }
-}
-
-module.exports = { connectToDatabase, connectToCollection, closeConnection };
