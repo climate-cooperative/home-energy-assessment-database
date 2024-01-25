@@ -1,6 +1,14 @@
-/*
-    This file defines the routes for the API. The routes are defined using the express router.
-*/
+/**
+ * File: api.js
+ * Description: This file sets up the routes for the API using Express Router.
+ * Each route is associated with a controller function imported from 'dataController.js'.
+ * The routes provide access to various data collections such as appliances, hvac appliances, home decades, home type, state table, zip table, and wood table.
+ * 
+ * @requires express
+ * @requires dataController
+ * 
+ * @exports router
+ */
 const express = require('express');
 const router = express.Router();
 const { 

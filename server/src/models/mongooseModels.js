@@ -1,8 +1,23 @@
-// create schema for models
+/**
+ * File: mongooseModels.js
+ * Description: This file defines the Mongoose schemas and models for the collections.
+ * The models are created using the database instances imported from '../config/mongodb'.
+ * 
+ * @requires mongoose
+ * @requires ../config/mongodb
+ * 
+ * @exports Appliances
+ * @exports HVAC_Appliances
+ * @exports Home_Decades,
+ * @exports  Home_Type,  
+ * @exports State_Data,
+ * @exports Zip_Code_Data,
+ * @exports Densified_Biomass_Prices
+ */
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const connection = require('../config/mongodb');
+const { test, Home_Energy_Data } = require('../config/mongodb');
 
 const appliancesSchema = new Schema({
     _id: String,
@@ -83,17 +98,14 @@ const wood_tableSchema = new Schema({
     price: String,
 });
 
-const test = connection.useDb('test');
-const home_energy_data = connection.useDb('Home_Energy_Data');
-
 // create models from schema
-const Appliances = test.model('Appliances', appliancesSchema);
-const HVAC_Appliances = test.model('HVAC Appliances', hvac_appliancesSchema);
-const Home_Decades = test.model('Home Decades', home_decadesSchema);
-const Home_Type = test.model('Home Type', home_typeSchema);
-const State_Data = home_energy_data.model('State Data', state_tableSchema);
-const Zip_Data = home_energy_data.model('Zip Code Data', zip_tableSchema);
-const Wood_Table = home_energy_data.model('Densified Biomass Prices', wood_tableSchema);
+const Appliances = test.model('Appliances', appliancesSchema, 'Appliances');
+const HVAC_Appliances = test.model('HVAC Appliances', hvac_appliancesSchema, 'HVAC Appliances');
+const Home_Decades = test.model('Home Decades', home_decadesSchema, 'Home Decades');
+const Home_Type = test.model('Home Type', home_typeSchema, 'Home Type');
+const State_Data = Home_Energy_Data.model('State Data', state_tableSchema, 'State Data');
+const Zip_Code_Data = Home_Energy_Data.model('Zip Code Data', zip_tableSchema, 'Zip Code Data');
+const Densified_Biomass_Prices = Home_Energy_Data.model('Densified Biomass Prices', wood_tableSchema, 'Densified Biomass Prices');
 
 module.exports = {
     Appliances,
@@ -101,6 +113,6 @@ module.exports = {
     Home_Decades,
     Home_Type,
     State_Data,
-    Zip_Data,
-    Wood_Table
+    Zip_Code_Data,
+    Densified_Biomass_Prices
 };

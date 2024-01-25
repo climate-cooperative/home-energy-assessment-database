@@ -1,8 +1,15 @@
-/*
-  This is the main file of the server.
-  It contains the code to start the server and connect to MongoDB Atlas.
-  It also contains the code to use the API routes.
-*/
+/**
+ * File: app.js
+ * Description: This file sets up the Express server and middleware, imports the API routes, and starts the server.
+ * CORS and JSON parsing middleware are used.
+ * The server listens on the port specified by the environment variable PORT, or 5000 if PORT is not set.
+ * 
+ * @requires express
+ * @requires cors
+ * @requires dotenv
+ * @requires ./routes/api
+ */
+
 const express = require('express');
 const cors = require('cors');
 const apiRoutes = require('./routes/api');

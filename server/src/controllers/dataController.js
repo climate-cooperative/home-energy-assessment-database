@@ -1,7 +1,24 @@
-/*
-    This file contains the controller functions for the data routes.
-    It exports a single function for each route.
-*/
+/**
+ * File: dataController.js
+ * Description: This file defines the controller functions for the API routes.
+ * Each function uses Mongoose to query the MongoDB database and sends the results as a JSON response.
+ * The functions handle GET requests for various data collections such as appliances, hvac appliances, home decades, home type, state data, zip code data, and densified biomass prices.
+ * 
+ * @requires mongoose
+ * @requires ../models/mongooseModels
+ * 
+ * @exports get_appliances
+ * @exports get_hvac_appliances
+ * @exports get_home_decades
+ * @exports get_home_type
+ * @exports get_state_table
+ * @exports get_state
+ * @exports get_zip_table
+ * @exports get_zipcode
+ * @exports get_state_zipcodes
+ * @exports get_wood_table
+ */
+
 const { 
     Appliances,
     HVAC_Appliances,
@@ -9,13 +26,13 @@ const {
     Home_Type,
     State_Data,
     Zip_Code_Data,
-    Wood_Table
+    Densified_Biomass_Prices
  } = require('../models/mongooseModels');
 
 // @desc    appliances route
 // @route   GET /api/appliances
 // @access  Public
-const get_appliances = async (req, res) => {
+const get_appliances = async (_req, res) => {
     try {
         const appliances = await Appliances.find({});
         res.json(appliances);
@@ -27,7 +44,7 @@ const get_appliances = async (req, res) => {
 // @desc    hvac_appliances route
 // @route   GET /api/hvac_appliances
 // @access  Public
-const get_hvac_appliances = async (req, res) => {
+const get_hvac_appliances = async (_req, res) => {
     try {
         const hvac_appliances = await HVAC_Appliances.find();
         res.json(hvac_appliances);
@@ -39,7 +56,7 @@ const get_hvac_appliances = async (req, res) => {
 // @desc    home_decades route
 // @route   GET /api/home_decades
 // @access  Public
-const get_home_decades = async (req, res) => {
+const get_home_decades = async (_req, res) => {
     try {
         const home_decades = await Home_Decades.find();
         res.json(home_decades);
@@ -51,7 +68,7 @@ const get_home_decades = async (req, res) => {
 // @desc    home_type route
 // @route   GET /api/home_type
 // @access  Public
-const get_home_type = async (req, res) => {
+const get_home_type = async (_req, res) => {
     try {
         const home_type = await Home_Type.find();
         res.json(home_type);
@@ -63,7 +80,7 @@ const get_home_type = async (req, res) => {
 // @desc    state_table route
 // @route   GET /api/state_table
 // @access  Public
-const get_state_table = async (req, res) => {
+const get_state_table = async (_req, res) => {
     try {
         const state_table = await State_Data.find();
         res.json(state_table);
@@ -87,7 +104,7 @@ const get_state = async (req, res) => {
 // @desc    zip_table route
 // @route   GET /api/zip_table
 // @access  Public
-const get_zip_table = async (req, res) => {
+const get_zip_table = async (_req, res) => {
     try {
         const zip_table = await Zip_Code_Data.find();
         res.json(zip_table);
@@ -101,7 +118,7 @@ const get_zip_table = async (req, res) => {
 // @access  Public
 const get_zipcode = async (req, res) => {
     try {
-        const zipcode = await Zip_Code_Data.findOne({ Zip_Code: req.params.zipcode });
+        const zipcode = await Zip_Code_Data.findOne({ Zipcode: req.params.zipcode });
         res.json(zipcode);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -123,9 +140,9 @@ const get_state_zipcodes = async (req, res) => {
 // @desc    wood_table route
 // @route   GET /api/wood_table
 // @access  Public
-const get_wood_table = async (req, res) => {
+const get_wood_table = async (_req, res) => {
     try {
-        const wood_table = await Wood_Table.find();
+        const wood_table = await Densified_Biomass_Prices.find();
         res.json(wood_table);
     } catch (err) {
         res.status(500).json({ message: err.message });
