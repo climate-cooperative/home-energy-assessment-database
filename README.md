@@ -64,3 +64,10 @@ Static Data:
   * We'd like a better source for this, for now we've used data from a home energy inspector.
 * Water usage averages
   * [Florida Solar Energy Center](https://www.fsec.ucf.edu/en/publications/pdf/fsec-pf-464-15.pdf)
+
+* Local Development
+  * Configure `.env` and other env variables needed
+  * Using Docker
+    * `docker-compose up` - Service should be hit at `http://localhost/`
+  * _note: add `--build` flag if need to force image rebuild_
+
