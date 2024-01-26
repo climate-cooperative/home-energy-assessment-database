@@ -1,0 +1,35 @@
+version: '2'
+services:
+  local:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+    # Change to meet ur env vars
+      - APP_PORT=3001
+      - DB_USERNAME=dev
+      - DB_PASSWORD=password
+      - DB_HOST=mongo:27017
+    ports:
+      - 3001:3001
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+    # used by mongo to set db username/pwd
+      - MONGO_INITDB_ROOT_USERNAME=dev
+      - MONGO_INITDB_ROOT_PASSWORD=password 
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+    - '80:80'
+    depends_on:
+    - local
+    - mongo
+    
