@@ -1,4 +1,4 @@
-# Residential Home Energy Database & API Functional Requirements
+# Home Energy Assessment Database & API Functional Requirements
 Welcome to the Zwell Open Source project! As a social purpose corporation, Zwell is dedicated to advancing carbon-neutral, sustainable energy solutions for homes. Our mission is to foster diverse, healthy communities by providing innovative and accessible energy efficiency tools and services.
 
 The primary goal of the Residential Home Energy Database & API is to consolidate diverse data sources into a unified platform that enables accurate calculation of a home's carbon footprint. This calculation will consider various factors, including local energy grid mix, weather conditions, and specific home attributes such as age, size, construction materials, and mechanical systems. The project aims to address the critical need for accessible and reliable data to support the development of home energy savings calculators, enable detailed analyses, and facilitate the creation of visualizations pertaining to residential home energy consumption and efficiency.
