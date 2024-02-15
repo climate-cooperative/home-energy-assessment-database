@@ -1,73 +1,112 @@
-# home-energy-data
-Documentation, conversions, and data supporting Zwell's home energy audit and calculation tools.
+# Residential Home Energy Database & API Functional Requirements
 
-* [Energy conversions](https://docs.google.com/document/d/1gqgwpOMkCsCWgHzdk7omc0xRaLz4ZHW64pKcWLB7BS4/edit?usp=sharing)
-* Appliance table
-* Fuel/utility cost table
-* State electricity production data
-* Zip code data (weather stations, water sites)
-* Solar insolation logic
-* Heating & cooling logic
-* Water heating logic
-* Lighting energy logic
-* Energy generation logic
-* CO2 emissions logic
-* Operating cost logic
+## Welcome to the Zwell Open Source Project
 
-Dynamic Data:
-* Heating Degree Days & Cooling Degree Days (at a weather station level)
-  * We pull the historical temperature data by weather station from the [GHCNd](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)
-  * We use an assumption around a 65° internal home temperature to determine heat degree and cooling degree days. We arrived at this number based on [EIA's definition](https://www.eia.gov/energyexplained/units-and-calculators/degree-days.php).
-* Ground Water Temperature (or Surface Water Temperature) (at a water site level
-  * [USGS Water Service API](https://waterdata.usgs.gov/blog/dataretrieval/)
-* Electricity Production Sources (at a state level)
-* Natural Gas Utility Price (at a state level)
-* Electricity Utility Price (at a state level)
-* Other Fuel Prices (Propane, Fuel Oil, Kerosene, Wood, Wood Pellets) (at a national average level)
-  * [EIA Open Data](https://www.eia.gov/opendata/)
-    * Natural Gas - Monthly by State
-    * Electricity - Monthly by State
-    * Propane - Weekly by State
-    * Heating Oil - Weekly by State
-  * We'd like to use APIv2 to connect pull this data by state as frequently as it is updated.
+As a social purpose corporation, Zwell is dedicated to advancing carbon-neutral, sustainable energy solutions for homes. Our mission is to foster diverse, healthy communities by providing innovative and accessible energy efficiency tools and services.
 
-Static Data:
-* Heating, Cooling, Water Heating
-  * Every appliance category has its own measure e.g. SEER and this is sourced from [AHRI](https://www.ahridirectory.org/) using a median rating for each product type and fuel type.
-* Appliance annual energy usage
-  * We are tyring to source the median efficiency from the [FTC's EnergyGuide](https://www.ftc.gov/news-events/topics/tools-consumers/energyguide-labels) for the following:
-    * Boilers
-    * Ceiling Fans
-    * Central Air Conditioners
-    * Clothes Washers
-    * Dishwashers
-    * Freezers
-    * Furnaces
-    * Heat Pumps
-    * Pool Heaters
-    * Refrigerators
-    * Televisions
-    * Water Heaters
-    * Room and Portable Air Aonditioners
-    * Light Bulbs
-  * We don't have create documentation on the efficiency sources for the following appliances and need help sourcing:
-    * Cooktops
-    * Ovens
-    * Dryers  
-* Zip code latitude and longitude
-  * [Geo Names](https://download.geonames.org/export/zip/ )
-* Home R values
-  * International Energy Conservation Code
-* ACH values
-  * ASHRAE?
-  * https://basc.pnnl.gov/information/infiltration-meets-ach50-requirements
-  * We'd like a better source for this, for now we've used data from a home energy inspector.
-* Water usage averages
-  * [Florida Solar Energy Center](https://www.fsec.ucf.edu/en/publications/pdf/fsec-pf-464-15.pdf)
+The Residential Home Energy Database & API consolidates diverse data sources into a unified platform, enabling accurate calculation of home carbon footprints. This effort supports the development of energy savings calculators, detailed analyses, and the creation of visualizations related to residential energy consumption and efficiency, empowering stakeholders to innovate and reduce environmental impacts.
 
-* Local Development
-  * Configure `.env` and other env variables needed
-  * Using Docker
-    * `docker-compose up` - Service should be hit at `http://localhost/`
-  * _note: add `--build` flag if need to force image rebuild_
+## Document Conventions
 
+- **Bold Text**: Used for headings, titles, and key points emphasis.
+- *Italic Text*: Indicates new terms or phrases defined in the glossary.
+- Bullet Points: Improve readability for lists, features, and requirements.
+- `Code Blocks`: For referencing API endpoints or code snippets.
+- **[MUST, SHOULD, MAY]**: Describe requirements' necessity, following RFC 2119 conventions.
+
+## Intended Audience and Reading Suggestions
+
+This document targets engineers, climate entrepreneurs, and others involved in climate science or reducing carbon emissions from residential energy. It is structured to guide readers through the project's scope, objectives, and detailed system requirements.
+
+- **Engineers**: Focus on system features, external interface requirements, and non-functional requirements.
+- **Climate Entrepreneurs**: Pay attention to the overall description, system features, and API integration opportunities.
+
+**Reading Suggestions**: Start with the Introduction and Overall Description, then explore sections relevant to your interests or expertise.
+
+## Project Scope
+
+The project will develop a database and API aggregating data on residential home energy use, supporting tools for energy savings calculation and data visualization.
+
+### In Scope
+
+- Aggregating diverse data sources related to home energy use.
+- Developing an API for easy data access.
+- Providing tools and documentation for API integration.
+
+### Out of Scope
+
+- Developing end-user applications or visualizations directly.
+- Data unrelated to residential energy consumption.
+
+## Overall Description
+
+### Product Perspective
+
+The Residential Home Energy Database & API is an integral part of the climate tech ecosystem, ensuring high-quality, accurate information from various sources. It serves as a foundational layer for applications ranging from home energy audits to climate research projects.
+
+#### Data Sources Include
+
+- Government databases for weather and energy data.
+- Association standards for appliance efficiencies.
+- Private sector data for fuel and utility costs.
+- Proprietary calculations for solar insolation and energy generation.
+
+### Product Functions
+
+- **Data Aggregation**: Compiles comprehensive information on residential energy use.
+- **API Access**: Offers easy access to aggregated data through a user-friendly API.
+- **Analytics Capabilities**: Supports data analysis for insights on energy use and savings.
+- **Integration Features**: Facilitates integration with other systems and applications.
+
+## User Classes and Characteristics
+
+- **Academic Researchers**: Need accurate data for climate studies and policy analysis.
+- **Policy Makers**: Seek reliable data for developing energy reduction programs.
+- **Homeowners**: Desire insights for reducing energy use and carbon footprint.
+
+## Operating Environment
+
+Built on a modern tech stack including Node.js, Express, and MongoDB, the platform is designed for high performance, scalability, and ease of integration.
+
+## Design and Implementation Constraints
+
+Challenges include data privacy and security, data accuracy, open source licensing compliance, scalability, and technology stack compatibility.
+
+## User Documentation
+
+Necessary documentation includes API guides, developer setup instructions, installation steps, use case examples, and troubleshooting FAQs.
+
+## System Features and Requirements
+
+Detailed specifications for data aggregation and management, API access, user engagement, and contribution, emphasizing security, performance, and quality attributes.
+
+### Data Categories and Functional Requirements
+
+- **Regional Climate Data**: Expand dataset coverage to 100 years.
+- **Water Data**: Extend historical data range for comprehensive analysis.
+- **Appliance Data**: Include detailed energy consumption data across a broader range.
+- **Fuel Data**: Enhance dataset with historical fuel cost data.
+- **Conversions**: Verify accuracy of energy conversion formulas.
+- **Incentives**: Aggregate data on energy efficiency incentives.
+- **Utilities Data**: Develop a dataset for information on utilities.
+- **Energy Generation Data**: Expand dataset for local energy generation specifics.
+
+### Performance Requirements
+
+- **Response Time**: API requests should respond within 2 seconds.
+- **Throughput**: Support 100 concurrent requests without performance degradation.
+- **Scalability**: System must scale horizontally to manage increased load efficiently.
+
+### Security Requirements
+
+- **Data Encryption**: TLS for data in transit, encryption at rest for sensitive data.
+- **Authentication and Authorization**: Secure mechanisms like OAuth 2.0, with RBAC.
+- **Compliance**: Adhere to data protection regulations like GDPR.
+- **Vulnerability Management**: Conduct regular security audits and update dependencies.
+
+### Software Quality Attributes
+
+- **Reliability**: Aim for 99.9% uptime with robust error handling.
+- **Maintainability**: Follow best practices and standards for easy updates.
+- **Scalability**: Support scaling efforts with minimal architectural changes.
+- **Usability**: Ensure user-friendly interfaces and comprehensive API documentation.
