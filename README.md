@@ -50,7 +50,7 @@ The Residential Home Energy Database & API is an integral part of the climate te
 - Private sector data for fuel and utility costs.
 - Proprietary calculations for solar insolation and energy generation.
 
-See the specific [documentation of our data sources](DOCUMENTATION.md)
+*See the specific [documentation of the API's data sources](DOCUMENTATION.md)*
 
 ### Product Functions
 
