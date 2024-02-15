@@ -1,6 +1,6 @@
 
-# home-energy-data
-Documentation, conversions, and data supporting Zwell's home energy audit and calculation tools.
+# Home Energy Data API - Data Source Documentation
+Documentation of data, formulae, and scientific conversions supporting Zwell's home energy audit and calculation tools.
 
 * [Energy conversions](https://docs.google.com/document/d/1gqgwpOMkCsCWgHzdk7omc0xRaLz4ZHW64pKcWLB7BS4/edit?usp=sharing)
 * Appliance table
