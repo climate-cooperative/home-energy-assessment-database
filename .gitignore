@@ -23,3 +23,5 @@ package-lock.json
 
 # Ignore .idea directory (JetBrains IDEs)
 .idea/
+
+./data/containers
