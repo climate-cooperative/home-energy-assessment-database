@@ -11,6 +11,7 @@ runs:
       run: terraform init
     - name: "TF PLAN"
       working-directory: "./terraform/"
+      shell: "bash"
       run: |
         export exitcode=0
         terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
