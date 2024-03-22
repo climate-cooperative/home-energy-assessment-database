@@ -4,6 +4,10 @@ resource "aws_lambda_function" "test_lambda" {
   image_uri = "${aws_ecr_repository.lambda_image_repo.repository_url}:${var.image_tag}"
   package_type = "Image"
   architectures = ["arm64"]
+
+  image_config {
+    command = [ "test.handler" ]
+  }
 }
 
 data "aws_iam_policy_document" "assume_role" {
