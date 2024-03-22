@@ -6,6 +6,14 @@ terraform {
     }
   }
 
+  cloud {
+    organization = "zwell-test"
+
+    workspaces {
+      name = "dev-test"
+    }
+  }
+
   required_version = "~> 1.7"
 
   backend "s3" {
