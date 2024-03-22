@@ -1,10 +1,5 @@
 name: "Terraform Plan"
 description: "Executes TF plan against s3 backend tf_state"
-env:
-  TF_CLOUD_ORGANIZATION: "zwell-test"
-  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "dev-test"
-  CONFIG_DIRECTORY: "./"
 runs:
   using: "composite"
   steps: 
@@ -20,7 +15,7 @@ runs:
       working-directory: "./terraform/"
       shell: "bash"
       run: |
-        ls
+        echo "${TF_API_TOKEN}"
         export exitcode=0
         terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
 
