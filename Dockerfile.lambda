@@ -1,0 +1,5 @@
+FROM amazon/aws-lambda-nodejs:20
+
+COPY test.js ${LAMBDA_TASK_ROOT}
+
+CMD [ "test.handler" ]
