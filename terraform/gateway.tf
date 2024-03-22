@@ -1,5 +1,5 @@
 data "aws_acm_certificate" "acm_cert" {
-  domain = var.acm_domain_name
+  domain = "*.zwellhome.com"
   statuses = [ "ISSUED" ]
   types = [ "IMPORTED" ]
 }

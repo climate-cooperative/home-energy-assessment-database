@@ -3,8 +3,3 @@ variable "image_tag" {
   type = string
   default = "null:latest"
 }
-
-variable "acm_domain_name" {
-  description = "domain name of acm cert"
-  type = string
-}
