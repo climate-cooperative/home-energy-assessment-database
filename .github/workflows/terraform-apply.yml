@@ -46,7 +46,7 @@ jobs:
         shell: bash
         run: |
           image_tag="${{env.BUILD_VERSION}}"
-          docker build -t ${{secrets.ecr_registry}}:${image_tag} -f ./Dockerfile.lambda --platform linx/arm64 .
+          docker build -t ${{secrets.ecr_registry}}:${image_tag} -f ./Dockerfile.lambda --platform linux/arm64 .
           docker push ${{secrets.ecr_registry}}:${image_tag}
 
   terraform:
