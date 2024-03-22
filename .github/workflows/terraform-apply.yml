@@ -10,6 +10,7 @@ env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "dev-test"
   CONFIG_DIRECTORY: "./terraform/"
+  AWS_DEFAULT_REGION: "us-west-2"
 
 jobs:
   metadata:
@@ -18,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Set build metadata
         shell: bash
         run: |
