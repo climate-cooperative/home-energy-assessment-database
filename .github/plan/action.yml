@@ -9,7 +9,7 @@ runs:
         terraform_wrapper: false
     - name: "TF INIT"
       shell: "bash"
-      run: terraform init
+      run: terraform init -reconfigure
     - name: "TF PLAN"
       working-directory: "./terraform/"
       shell: "bash"
