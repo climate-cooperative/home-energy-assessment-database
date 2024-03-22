@@ -10,12 +10,14 @@ runs:
     - name: "TF INIT"
       working-directory: "./terraform/"
       shell: "bash"
-      run: terraform init -reconfigure
+      run: |
+        echo "${TF_API_TOKEN}"
+        terraform init -reconfigure
     - name: "TF PLAN"
       working-directory: "./terraform/"
       shell: "bash"
       run: |
-        echo "${TF_API_TOKEN}"
+        
         export exitcode=0
         terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
 
