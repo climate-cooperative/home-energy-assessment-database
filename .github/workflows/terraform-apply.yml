@@ -10,24 +10,12 @@ env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
   AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+  BUILD_VERSION: "${{ github.sha }}"
   TF_WORKSPACE: "dev-test"
   CONFIG_DIRECTORY: "./terraform/"
   AWS_DEFAULT_REGION: "us-west-2"
 
 jobs:
-  metadata:
-    name: Set build metadata
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set build metadata
-        shell: bash
-        run: |
-          gitHash=$(git rev-parse --short ${{ github.sha }})
-          echo "BUILD_VERSION=$gitHash" >> $GITHUB_ENV
-
   docker:
     name: "Build and Push Image"
     runs-on: ubuntu-latest
