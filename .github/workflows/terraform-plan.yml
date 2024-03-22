@@ -18,6 +18,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Set build metadata
+        shell: bash
+        run: |
+          gitHash=$(git rev-parse --short ${{ github.sha }})
+          echo "BUILD_VERSION=$gitHash" >> $GITHUB_ENV
+
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
