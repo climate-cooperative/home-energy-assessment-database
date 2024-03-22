@@ -43,7 +43,7 @@ jobs:
         run: |
           image_tag="test:${{env.BUILD_VERSION}}"
           docker build -t ${image_tag} -f ./Dockerfile.lambda .
-          docker push ${{secrets.ecr_registry}}:${image_tag}
+          echo "docker push ${{secrets.ecr_registry}}:${image_tag}"
 
   terraform:
     name: "Terraform Apply"
