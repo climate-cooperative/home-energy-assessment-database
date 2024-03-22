@@ -1,5 +1,5 @@
 variable "image_tag" {
   description = "Tag of the image built"
-  type = "string"
+  type = string
   default = "null:latest"
 }
