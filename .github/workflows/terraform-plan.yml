@@ -26,7 +26,7 @@ jobs:
         shell: "bash"
         run: |
           echo "${TF_API_TOKEN}"
-          terraform init -reconfigure
+          terraform init
       - name: "TF PLAN"
         working-directory: "./terraform/"
         shell: "bash"
