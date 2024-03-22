@@ -12,6 +12,37 @@ env:
   CONFIG_DIRECTORY: "./terraform/"
 
 jobs:
+  metadata:
+    name: Set build metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set build metadata
+        shell: bash
+        run: |
+          gitHash=$(git rev-parse --short ${{ github.sha }})
+          echo "BUILD_VERSION=$gitHash" >> $GITHUB_ENV
+
+  docker:
+    name: "Build and Push Image"
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registries: ${{ secrets.aws_account_id }}
+          mask-password: "true"
+
+      - name: 'Build Image'
+        shell: bash
+        run: |
+          image_tag="test:${{env.BUILD_VERSION}}"
+          docker build -t ${image_tag} -f ./Dockerfile.lambda .
+          docker push ${{secrets.ecr_registry}}:${image_tag}
+
   terraform:
     name: "Terraform Apply"
     runs-on: ubuntu-latest
