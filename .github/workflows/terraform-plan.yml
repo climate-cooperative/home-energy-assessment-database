@@ -9,6 +9,10 @@ env:
   CONFIG_DIRECTORY: "./terraform/"
 
 jobs:
+  # Add jobs in to run checks
+  # linting
+  # unit test
+
   terraform:
     name: "tf plan devtest"
     runs-on: ubuntu-latest
@@ -19,12 +23,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set build metadata
-        shell: bash
-        run: |
-          gitHash=$(git rev-parse --short ${{ github.sha }})
-          echo "BUILD_VERSION=$gitHash" >> $GITHUB_ENV
-
+        # uploads/initiates a configuration in terraform
+        # akin to terraform init
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
@@ -33,6 +33,8 @@ jobs:
           directory: ${{ env.CONFIG_DIRECTORY }}
           speculative: true
 
+        # runs changes in terrafrom/ against current state to create a tf.plan
+        # tarraform plan
       - name: Create Plan Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
         id: plan-run
@@ -41,6 +43,7 @@ jobs:
           configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
           plan_only: true
 
+        # Gets the plan and logs it in pipeline for debugging
       - name: Get Plan Output
         uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.0
         id: plan-output

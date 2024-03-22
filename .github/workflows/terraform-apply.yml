@@ -16,6 +16,7 @@ env:
   AWS_DEFAULT_REGION: "us-west-2"
 
 jobs:
+  # builds and pushes image to ecr
   docker:
     name: "Build and Push Image"
     runs-on: ubuntu-latest
@@ -27,10 +28,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4 # More information on this action can be found below in the 'AWS Credentials' section
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
+        # configure pipeline login for ecr
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -38,6 +40,8 @@ jobs:
           registries: ${{ secrets.aws_account_id }}
           mask-password: "true"
 
+        # Build image and tag
+        # Push to ECR
       - name: 'Build Image'
         shell: bash
         run: |
@@ -47,6 +51,7 @@ jobs:
 
   terraform:
     name: "Terraform Apply"
+    needs: docker
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -54,6 +59,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+        # Gets the most current config (tf.plan) for org + workspace combo
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: apply-upload
@@ -61,6 +67,7 @@ jobs:
           workspace: ${{ env.TF_WORKSPACE }}
           directory: ${{ env.CONFIG_DIRECTORY }}
 
+        # Dry run terrafrom apply
       - name: Create Apply Run
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
         id: apply-run
@@ -68,6 +75,7 @@ jobs:
           workspace: ${{ env.TF_WORKSPACE }}
           configuration_version: ${{ steps.apply-upload.outputs.configuration_version_id }}
 
+        # terraform apply
       - name: Apply
         uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
         if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
