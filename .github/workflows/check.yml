@@ -1,4 +1,4 @@
-name: "tf plan"
+name: "PR Check"
 on:
   pull_request:
 

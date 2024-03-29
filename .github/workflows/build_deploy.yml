@@ -1,4 +1,4 @@
-name: "Terraform Apply"
+name: "Build and Deploy"
 
 on:
   push:
