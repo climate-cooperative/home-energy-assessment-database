@@ -12,25 +12,4 @@ resource "aws_dynamodb_table" "zwell_appliance_table" {
           name = "appliance"
           type = "S"
         }
-  attribute {
-          name = "fuel_type"
-          type = "S"
-        }
-  attribute {
-          name = "unit"
-          type = "S"
-        }
-  attribute {
-          name = "per_year"
-          type = "N"
-        }
-  attribute {
-          name = "avg_price"
-          type = "N"
-        }
-  attribute {
-          name = "lifespan"
-          type = "N"
-        }
-
 }
