@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild test.js --bundle --platform=node --target=node10.4"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "esbuild": "^0.20.2",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "nodemon": "^3.0.3"
