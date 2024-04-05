@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild test.js --bundle --platform=node --target=node10.4"
+    "build": "esbuild ./src/test.js --bundle --minify --platform=node --target=node20 --outfile=dist/lambda.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Zwell-Home/home-energy-data#readme",
   "dependencies": {
     "@codegenie/serverless-express": "^4.14.0",
+    "@faker-js/faker": "^8.4.1",
     "axios": "^1.6.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
