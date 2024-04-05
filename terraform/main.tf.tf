@@ -1,5 +1,5 @@
-resource "aws_lambda_function" "test_lambda" {
-  function_name = "zwell-test-lambda"
+resource "aws_lambda_function" "zwell_api_lambda" {
+  function_name = "zwell-data-api-lambda"
   role = aws_iam_role.iam_for_lambda.arn
   image_uri = "${aws_ecr_repository.lambda_image_repo.repository_url}:${var.image_tag}"
   package_type = "Image"
@@ -12,6 +12,7 @@ resource "aws_lambda_function" "test_lambda" {
 
 data "aws_iam_policy_document" "assume_role" {
   statement {
+    sid = "assumeRole"
     effect = "Allow"
 
     principals {
@@ -20,6 +21,22 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     actions = ["sts:AssumeRole"]
+  }
+
+  statement {
+    sid = "dynamo_appliances_read"
+    effect = "Allow"
+
+    actions = [
+        "dynamodb:BatchGetItem",
+				"dynamodb:GetItem",
+				"dynamodb:Query",
+				"dynamodb:Scan"
+    ]
+
+    resources = [
+      aws_dynamodb_table.zwell_appliance_table.arn
+    ]
   }
 }
 
