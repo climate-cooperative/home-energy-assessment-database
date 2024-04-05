@@ -1,6 +1,4 @@
-// zwell certs live in us-east-1...
 data "aws_acm_certificate" "acm_cert" {
-  provider = aws.us-east-1
   domain = "*.zwell.io"
   statuses = [ "ISSUED" ]
 }
