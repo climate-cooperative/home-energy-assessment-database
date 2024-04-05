@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "lambda_document" {
 }
 
 resource "aws_iam_role" "zwell_data_api_role" {
-  name               = "iam_for_lambda"
+  name               = "zwell_data_api_role"
   assume_role_policy = data.aws_iam_policy_document.lambda_document.json
 }
 
