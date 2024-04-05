@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "zwell_api_lambda" {
   function_name = "zwell-data-api-lambda"
-  role = aws_iam_role.iam_for_lambda.arn
+  role = aws_iam_role.zwell_data_api_role.arn
   image_uri = "${aws_ecr_repository.lambda_image_repo.repository_url}:${var.image_tag}"
   package_type = "Image"
   architectures = ["arm64"]
@@ -10,7 +10,7 @@ resource "aws_lambda_function" "zwell_api_lambda" {
   }
 }
 
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "lambda_document" {
   statement {
     sid = "assumeRole"
     effect = "Allow"
@@ -40,9 +40,9 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
-resource "aws_iam_role" "iam_for_lambda" {
+resource "aws_iam_role" "zwell_data_api_role" {
   name               = "iam_for_lambda"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.lambda_document.json
 }
 
 resource "aws_lambda_permission" "zwell-api-gw-permission" {
