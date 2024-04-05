@@ -1,7 +1,8 @@
+// zwell certs live in us-east-1...
 data "aws_acm_certificate" "acm_cert" {
-  domain = "*.zwellhome.com"
+  provider = aws.us-east-1
+  domain = "*.zwell.io"
   statuses = [ "ISSUED" ]
-  types = [ "IMPORTED" ]
 }
 
 # API_GATEWAY
@@ -12,7 +13,7 @@ resource "aws_apigatewayv2_api" "zwell-api-gateway" {
 
 resource "aws_apigatewayv2_stage" "zwell-api-stage" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
-  name = "devtest-zwell-api"
+  name = "zwell-home-energy-api"
 
   auto_deploy = true
 }
@@ -20,7 +21,7 @@ resource "aws_apigatewayv2_stage" "zwell-api-stage" {
 resource "aws_apigatewayv2_integration" "zwell-api-integration" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
 
-  integration_uri = aws_lambda_function.test_lambda.invoke_arn
+  integration_uri = aws_lambda_function.zwell_api_lambda.invoke_arn
   integration_type = "AWS_PROXY"
   integration_method = "POST"
 }
@@ -28,13 +29,13 @@ resource "aws_apigatewayv2_integration" "zwell-api-integration" {
 resource "aws_apigatewayv2_route" "zwell-api-route-GET" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
 
-  route_key = "GET /hello"
+  route_key = "GET /"
   target = "integrations/${aws_apigatewayv2_integration.zwell-api-integration.id}"
 }
 
 # API_GATEWAY_DOMAIN
 resource "aws_apigatewayv2_domain_name" "zwell-api-domain" {
-  domain_name = "api2.zwellhome.com"
+  domain_name = "api.zwell.io"
 
   domain_name_configuration {
     certificate_arn = data.aws_acm_certificate.acm_cert.arn
