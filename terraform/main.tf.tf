@@ -45,7 +45,7 @@ resource "aws_lambda_permission" "zwell-api-gw-permission" {
 // dynamodb permission
 data "aws_iam_policy_document" "zwell_data_api_dynamo_document" {
   statement {
-    sid = "dynamo_appliances_read"
+    sid = "dynamoAppliancesREAD"
     effect = "Allow"
 
     actions = [
