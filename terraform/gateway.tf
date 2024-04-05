@@ -3,7 +3,6 @@ data "aws_acm_certificate" "acm_cert" {
   provider = aws.us-east-1
   domain = "*.zwell.io"
   statuses = [ "ISSUED" ]
-  types = [ "IMPORTED" ]
 }
 
 # API_GATEWAY
