@@ -1,5 +1,5 @@
 data "aws_acm_certificate" "acm_cert" {
-  domain = "*.zwellhome.com"
+  domain = "*.zwell.io"
   statuses = [ "ISSUED" ]
   types = [ "IMPORTED" ]
 }
@@ -12,7 +12,7 @@ resource "aws_apigatewayv2_api" "zwell-api-gateway" {
 
 resource "aws_apigatewayv2_stage" "zwell-api-stage" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
-  name = "devtest-zwell-api"
+  name = "zwell-home-energy-api"
 
   auto_deploy = true
 }
@@ -28,13 +28,13 @@ resource "aws_apigatewayv2_integration" "zwell-api-integration" {
 resource "aws_apigatewayv2_route" "zwell-api-route-GET" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
 
-  route_key = "GET /hello"
+  route_key = "GET /"
   target = "integrations/${aws_apigatewayv2_integration.zwell-api-integration.id}"
 }
 
 # API_GATEWAY_DOMAIN
 resource "aws_apigatewayv2_domain_name" "zwell-api-domain" {
-  domain_name = "api2.zwellhome.com"
+  domain_name = "api.zwell.io"
 
   domain_name_configuration {
     certificate_arn = data.aws_acm_certificate.acm_cert.arn

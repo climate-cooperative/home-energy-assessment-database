@@ -48,7 +48,7 @@ resource "aws_iam_role" "zwell_data_api_role" {
 resource "aws_lambda_permission" "zwell-api-gw-permission" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.test_lambda.function_name
+  function_name = aws_lambda_function.zwell_api_lambda.function_name
 
   principal     = "apigateway.amazonaws.com"
 
