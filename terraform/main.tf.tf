@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "lambda_assume_document" {
 
 resource "aws_iam_role" "zwell_data_api_role" {
   name               = "zwell_data_api_role"
-  assume_role_policy = data.aws_iam_policy_document.lambda_document.json
+  assume_role_policy = data.aws_iam_policy_document.lambda_assume_document.json
 }
 
 // api-gateway invoke permission
