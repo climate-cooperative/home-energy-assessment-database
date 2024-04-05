@@ -1,4 +1,4 @@
-FROM node:iron-alpine AS BUILDER
+FROM  --platform=arm64 node:iron-alpine AS BUILDER
 
 WORKDIR /app
 
