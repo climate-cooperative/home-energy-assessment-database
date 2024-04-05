@@ -20,7 +20,7 @@ resource "aws_apigatewayv2_stage" "zwell-api-stage" {
 resource "aws_apigatewayv2_integration" "zwell-api-integration" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
 
-  integration_uri = aws_lambda_function.test_lambda.invoke_arn
+  integration_uri = aws_lambda_function.zwell_api_lambda.invoke_arn
   integration_type = "AWS_PROXY"
   integration_method = "POST"
 }
