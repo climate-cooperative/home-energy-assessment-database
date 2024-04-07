@@ -61,3 +61,19 @@ resource "aws_dynamodb_table" "zwell_home_type_table" {
           type = "S"
         }
 }
+
+resource "aws_dynamodb_table" "zwell_state_table" {
+  name = "prod_zwell_state_table"
+  billing_mode = "PAY_PER_REQUEST" // free < 1mil read/write ops/units... ALOT
+  hash_key = "_id" // primary key
+  range_key = "state" // sort key
+
+  attribute {
+        name = "_id"
+        type = "S"
+      }
+  attribute {
+          name = "state"
+          type = "S"
+        }
+}
