@@ -27,7 +27,7 @@ resource "aws_apigatewayv2_integration" "zwell-api-integration" {
 resource "aws_apigatewayv2_route" "zwell-api-route-GET" {
   api_id = aws_apigatewayv2_api.zwell-api-gateway.id
 
-  route_key = "GET /"
+  route_key = "$default"
   target = "integrations/${aws_apigatewayv2_integration.zwell-api-integration.id}"
 }
 
