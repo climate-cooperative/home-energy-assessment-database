@@ -45,3 +45,19 @@ resource "aws_dynamodb_table" "zwell_home_decade_table" {
           type = "S"
         }
 }
+
+resource "aws_dynamodb_table" "zwell_home_type_table" {
+  name = "prod_zwell_home_type_table"
+  billing_mode = "PAY_PER_REQUEST" // free < 1mil read/write ops/units... ALOT
+  hash_key = "_id" // primary key
+  range_key = "home_type" // sort key
+
+  attribute {
+        name = "_id"
+        type = "S"
+      }
+  attribute {
+          name = "home_type"
+          type = "S"
+        }
+}

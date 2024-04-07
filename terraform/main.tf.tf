@@ -60,7 +60,8 @@ data "aws_iam_policy_document" "zwell_data_api_dynamo_document" {
     resources = [
       aws_dynamodb_table.zwell_appliance_table.arn,
       aws_dynamodb_table.zwell_hvac_table.arn,
-      aws_dynamodb_table.zwell_home_decade_table.arn
+      aws_dynamodb_table.zwell_home_decade_table.arn,
+      aws_dynamodb_table.zwell_home_type_table.arn
     ]
   }
 }
