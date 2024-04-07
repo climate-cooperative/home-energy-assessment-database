@@ -77,3 +77,19 @@ resource "aws_dynamodb_table" "zwell_state_table" {
           type = "S"
         }
 }
+
+resource "aws_dynamodb_table" "zwell_zipcode_table" {
+  name = "prod_zwell_zipcode_table"
+  billing_mode = "PAY_PER_REQUEST" // free < 1mil read/write ops/units... ALOT
+  hash_key = "_id" // primary key
+  range_key = "zipcode" // sort key
+
+  attribute {
+        name = "_id"
+        type = "S"
+      }
+  attribute {
+          name = "zipcode"
+          type = "S"
+        }
+}
