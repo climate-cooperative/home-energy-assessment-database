@@ -29,3 +29,19 @@ resource "aws_dynamodb_table" "zwell_hvac_table" {
           type = "S"
         }
 }
+
+resource "aws_dynamodb_table" "zwell_home_decade_table" {
+  name = "prod_zwell_home_decade_table"
+  billing_mode = "PAY_PER_REQUEST" // free < 1mil read/write ops/units... ALOT
+  hash_key = "_id" // primary key
+  range_key = "decade" // sort key
+
+  attribute {
+        name = "_id"
+        type = "S"
+      }
+  attribute {
+          name = "decade"
+          type = "S"
+        }
+}
