@@ -1,14 +1,14 @@
 const { Router } = require('express');
-const hometypeRouter = Router();
+const homeTypeRouter = Router();
 
 const {
   getAllHomeTypes,
   getHomeType
 } = require('../controllers/homeType.controller');
 
-hometypeRouter.get('/', getAllHomeTypes);
+homeTypeRouter.get('/', getAllHomeTypes);
 
-hometypeRouter.get('/:type', getHomeType)
+homeTypeRouter.get('/:type', getHomeType)
 
 
-module.exports = { hometypeRouter };
+module.exports = { homeTypeRouter };
