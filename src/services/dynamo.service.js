@@ -24,8 +24,9 @@ class DynamoService {
   async getItem(table, query) {
     const command = {
       TableName: table,
-      FilterExpression: buildScanExpression(query),
-      ExpressionAttributeValues: buildScanAttributes(query),
+      FilterExpression: DynamoService.buildScanExpression(query),
+      ExpressionAttributeValues: DynamoService.buildScanAttributeValues(query),
+      ExpressionAttributeNames: DynamoService.buildScanAttributeNames(query),
       Select: 'ALL_ATTRIBUTES'
     }
 
@@ -37,26 +38,36 @@ class DynamoService {
     return await this.docClient.scan({
       TableName: table,
       FilterExpression: expression,
-      ExpressionAttributeValues: attributes
+      ExpressionAttributeValues: attributes,
+      Select: 'ALL_ATTRIBUTES'
     });
   }
 
   static buildScanExpression(query) {
     const expressions = [];
     for (const key in query) {
-      expressions.push(`${key} = :${key}`);
+      expressions.push(`#${key} = :${key}`);
     }
 
     return expressions.join(' AND ')
   }
 
-  static buildScanAttributes(query) {
+  static buildScanAttributeValues(query) {
     const attributes = {};
     for (const key in query) {
      attributes[`:${key}`] = query[key]
     }
 
     return attributes;
+  }
+
+  static buildScanAttributeNames(query) {
+    const names = {};
+    for (const key in query) {
+     names[`#${key}`] = key
+    }
+
+    return names;
   }
 
 }

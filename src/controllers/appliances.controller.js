@@ -19,7 +19,7 @@ const getAppliance = async (req, res) => {
   try {
     const applaince = await dynamoService.getItem(
       APPLIANCE_TABLE,
-      { name: req.params.name }
+      { appliance: req.params.name }
     );
     res.json(applaince.Items);
   } catch (err) {
