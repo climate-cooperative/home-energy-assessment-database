@@ -29,17 +29,6 @@ const {
     Densified_Biomass_Prices
  } = require('../models/mongooseModels');
 
-// @desc    appliances route
-// @route   GET /api/appliances
-// @access  Public
-const get_appliances = async (_req, res) => {
-    try {
-        const appliances = await Appliances.find({});
-        res.json(appliances);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-}
 
 // @desc    hvac_appliances route
 // @route   GET /api/hvac_appliances

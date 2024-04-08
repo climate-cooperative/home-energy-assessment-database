@@ -1,16 +1,30 @@
 const { DynamoService } = require("../services/dynamo.service")
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
+const { APPLIANCE_TABLE } = require('../constants/tables');
 
 const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2' }));
 
 // GET /appliances
 const getAllAppliances = async (req, res) => {
   try {
-    const applainces = await dynamoService.getAll('prod_zwell_appliance_table');
-    res.json(applainces);
+    const applainces = await dynamoService.getAll(APPLIANCE_TABLE);
+    res.json(applainces.Items);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 }
 
-module.exports = { getAllAppliances }
+// GET /appliances/:name
+const getAppliance = async (req, res) => {
+  try {
+    const applaince = await dynamoService.getItem(
+      APPLIANCE_TABLE,
+      { name: req.params.name }
+    );
+    res.json(applaince.Items);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+module.exports = { getAllAppliances, getAppliance }

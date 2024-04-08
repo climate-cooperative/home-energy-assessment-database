@@ -7,4 +7,4 @@ class StateModel {
   state_energy_breakdown; // arr
 }
 
-module.export = { StateModel}
+module.exports = { StateModel}

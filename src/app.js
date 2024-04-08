@@ -12,7 +12,11 @@
 
 const express = require('express');
 const cors = require('cors');
-const { router } = require('./routes/api');
+const {
+  APPLIANCE_ROUTE
+} = require('./constants/routes');
+
+const { applianceRouter } = require('./routes/appliance.router');
 
 require('dotenv').config();
 
@@ -24,6 +28,8 @@ app.use(cors(
     credentials: true
   }
 ));
+
+// json parser
 app.use(express.json());
 
 // Log each request
@@ -33,12 +39,7 @@ app.use((req, res, next) => {
 });
 
 // Use API routes
-app.use('/', router);
+app.use(APPLIANCE_ROUTE, applianceRouter);
 
-// Start the server
-const PORT = process.env.PORT || 3001;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on http://localhost:${PORT}`);
-// });
 
 module.exports = app;
