@@ -44,6 +44,9 @@ const {
     getAllAppliances
 } = require('../controllers/appliances.controller');
 
+router.get('/', (req, res) => {
+    res.json(req)
+});
 router.get('/appliances', getAllAppliances);
 
 
