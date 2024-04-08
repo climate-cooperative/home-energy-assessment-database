@@ -65,6 +65,7 @@ data "aws_iam_policy_document" "zwell_data_api_dynamo_document" {
       aws_dynamodb_table.zwell_home_type_table.arn,
       aws_dynamodb_table.zwell_state_table.arn,
       aws_dynamodb_table.zwell_zipcode_table.arn,
+      "${aws_dynamodb_table.zwell_zipcode_table.arn}/index/*",
       aws_dynamodb_table.zwell_biomass_table.arn
     ]
   }
