@@ -92,6 +92,12 @@ resource "aws_dynamodb_table" "zwell_zipcode_table" {
           name = "zipcode"
           type = "S"
         }
+
+  global_secondary_index {
+    name = "prod-zipcode-index"
+    hash_key = "zipcode"
+    projection_type = "ALL"
+  }
 }
 
 resource "aws_dynamodb_table" "zwell_biomass_table" {

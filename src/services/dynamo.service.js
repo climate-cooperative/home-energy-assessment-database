@@ -21,6 +21,20 @@ class DynamoService {
     });
   }
 
+  async getItemGSI(table, index, query) {
+    const command = {
+      TableName: table,
+      IndexName: index,
+      Select: 'ALL_ATTRIBUTES',
+      KeyConditionExpression: DynamoService.buildScanExpression(query),
+      ExpressionAttributeValues: DynamoService.buildScanAttributeValues(query),
+      ExpressionAttributeNames: DynamoService.buildScanAttributeNames(query),
+    }
+
+    console.log(command);
+    return await this.docClient.query(command);
+  }
+
   async getItem(table, query) {
     const command = {
       TableName: table,
