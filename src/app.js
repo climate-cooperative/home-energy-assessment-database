@@ -13,10 +13,22 @@
 const express = require('express');
 const cors = require('cors');
 const {
-  APPLIANCE_ROUTE
+  APPLIANCE_ROUTE,
+  HVAC_ROUTE,
+  HOME_DECADE_ROUTE,
+  HOME_TYPE_ROUTE,
+  STATE_ROUTE,
+  ZIPCODE_ROUTE,
+  BIOMASS_ROUTE
 } = require('./constants/routes');
 
 const { applianceRouter } = require('./routes/appliance.router');
+const { biomassRouter } = require('./routes/biomass.router');
+const { homeDecadeRouter } = require('./routes/homeDecade.router');
+const { homeTypeRouter } = require('./routes/homeType.router');
+const { hvacRouter } = require('./routes/hvac.router');
+const { stateRouter } = require('./routes/state.route');
+const { zipcodeRouter } = require('./routes/zipcode.router');
 
 require('dotenv').config();
 
@@ -40,6 +52,12 @@ app.use((req, res, next) => {
 
 // Use API routes
 app.use(APPLIANCE_ROUTE, applianceRouter);
+app.use(BIOMASS_ROUTE, biomassRouter);
+app.use(HOME_DECADE_ROUTE, homeDecadeRouter);
+app.use(HOME_TYPE_ROUTE, homeTypeRouter);
+app.use(HVAC_ROUTE, hvacRouter);
+app.use(STATE_ROUTE, stateRouter);
+app.use(ZIPCODE_ROUTE, zipcodeRouter);
 
-
+// export to use start elsewhere
 module.exports = app;
