@@ -53,4 +53,4 @@ router.get('/', (req, res) => {
 router.get('/appliances', getAllAppliances);
 
 
-module.exports = router;
+module.exports = { router };
