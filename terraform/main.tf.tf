@@ -4,7 +4,8 @@ resource "aws_lambda_function" "zwell_api_lambda" {
   image_uri = "${aws_ecr_repository.lambda_image_repo.repository_url}:${var.image_tag}"
   package_type = "Image"
   architectures = ["arm64"]
-  memory_size = 256
+  memory_size = 521
+  timeout = 10 // 10 seconds
 
   image_config {
     command = [ "lambda.handler" ]
