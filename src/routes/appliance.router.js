@@ -9,7 +9,7 @@ const {
 
 applianceRouter.get('/', getAllAppliances);
 
-applianceRouter.get('/:name', getAppliance)
+applianceRouter.get('/:name', getAppliance);
 
 
 module.exports = { applianceRouter };

@@ -14,12 +14,12 @@ const getAllHomeDecades = async (req, res) => {
   }
 }
 
-// GET /state/:name
+// GET /home_decade/:decade
 const getHomeDecade = async (req, res) => {
   try {
     const homeDecade = await dynamoService.getItem(
       HOME_DECADE_TABLE,
-      { decade: req.params.name }
+      { decade: req.params.decade }
     );
     res.json(homeDecade.Items);
   } catch (err) {
