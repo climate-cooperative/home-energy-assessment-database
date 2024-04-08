@@ -35,6 +35,10 @@ app.use((req, res, next) => {
 // Use API routes
 app.use('/api', apiRoutes);
 
+app.get('/', (req, res) => {
+  res.json(req);
+});
+
 // Start the server
 const PORT = process.env.PORT || 3001;
 // app.listen(PORT, () => {
