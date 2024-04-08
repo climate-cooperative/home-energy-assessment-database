@@ -12,7 +12,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const apiRoutes = require('./routes/api');
+const { router } = require('./routes/api');
 
 require('dotenv').config();
 
@@ -33,11 +33,7 @@ app.use((req, res, next) => {
 });
 
 // Use API routes
-app.use('/api', apiRoutes);
-
-app.get('/', (req, res) => {
-  res.json(req);
-});
+app.use('/', router);
 
 // Start the server
 const PORT = process.env.PORT || 3001;

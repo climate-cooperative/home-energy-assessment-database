@@ -39,14 +39,17 @@ const router = express.Router();
 // router.get('/zip_table/state/:state', get_state_zipcodes);
 
 // router.get('/wood_table', get_wood_table);
+const { getCurrentInvoke } = require('@codegenie/serverless-express')
 
 const {
     getAllAppliances
 } = require('../controllers/appliances.controller');
 
 router.get('/', (req, res) => {
+    console.log('current invoke: ', getCurrentInvoke);
     res.json(req)
 });
+
 router.get('/appliances', getAllAppliances);
 
 
