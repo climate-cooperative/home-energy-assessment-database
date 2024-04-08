@@ -16,6 +16,7 @@ describe('dynamoService', () => {
     expect(result).toEqual({ ':name': 'test' });
   });
 
+  // needs aws access... integration test
   // test('getItem should get item by simple query', async () => {
   //   const result = await documentServcie.getItem(
   //     APPLIANCE_TABLE,
