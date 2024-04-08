@@ -22,11 +22,15 @@ class DynamoService {
   }
 
   async getItem(table, query) {
-    return await this.docClient.scan({
+    const command = {
       TableName: table,
       FilterExpression: buildScanExpression(query),
-      ExpressionAttributeValues: buildScanAttributes(query)
-    });
+      ExpressionAttributeValues: buildScanAttributes(query),
+      Select: 'ALL_ATTRIBUTES'
+    }
+
+    console.log(command);
+    return await this.docClient.scan(command);
   }
 
   async getItemComplex(table, expression, attribute) {
