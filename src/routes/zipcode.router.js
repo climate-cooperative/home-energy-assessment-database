@@ -6,7 +6,7 @@ const {
   getAllZipcodes
 } = require('../controllers/zipcode.controller');
 
-zipcodeRouter.get('/', getAllZipcodes);
+// zipcodeRouter.get('/', getAllZipcodes);
 
 zipcodeRouter.get('/:value', getZipcode);
 
