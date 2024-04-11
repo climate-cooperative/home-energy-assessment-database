@@ -1,7 +1,7 @@
 # Home Energy Assessment Database & API Functional Requirements
 Welcome to the Climate Cooperative Open Source project! As a social purpose corporation, Climate Cooperative is dedicated to advancing carbon-neutral, sustainable energy solutions for homes. Our mission is to foster diverse, healthy communities by providing innovative and accessible energy efficiency tools and services.
 
-The primary goal of the Residential Home Energy Database & API is to consolidate diverse data sources into a unified platform that enables accurate calculation of a home's carbon footprint. This calculation will consider various factors, including local energy grid mix, weather conditions, and specific home attributes such as age, size, construction materials, and mechanical systems. The project aims to address the critical need for accessible and reliable data to support the development of home energy savings calculators, enable detailed analyses, and facilitate the creation of visualizations pertaining to residential home energy consumption and efficiency.
+The primary goal of the Home Energy Assessment Database & API is to consolidate diverse data sources into a unified platform that enables accurate calculation of a home's carbon footprint. This calculation will consider various factors, including local energy grid mix, weather conditions, and specific home attributes such as age, size, construction materials, and mechanical systems. The project aims to address the critical need for accessible and reliable data to support the development of home energy savings calculators, enable detailed analyses, and facilitate the creation of visualizations pertaining to residential home energy consumption and efficiency.
 
 This platform seeks to empower climate tech startups, academic researchers, and other stakeholders with the data necessary to innovate, study, and propose solutions aimed at reducing residential energy consumption and its environmental impact. By providing a comprehensive and easily accessible API, the project aspires to catalyze advancements in home energy efficiency, support policy development, and contribute to a more sustainable future.
 
@@ -43,14 +43,14 @@ The project will include the development of a comprehensive database and an acce
 
 ### Product Perspective
 
-The "Residential Home Energy Database & API" is designed to be an integral component within the ecosystem of climate tech and academic research, interfacing seamlessly with existing and future systems, platforms, or initiatives. By sourcing data from a comprehensive array of reliable government, association, and private sources, as well as developing proprietary calculations where necessary, the platform ensures high-quality, accurate information. The database and API act as a foundational layer, supporting a wide range of applications from home energy audits to climate research projects.
+The Home Energy Assessment Database (HEAD) & API is designed to be an integral component within the ecosystem of climate tech and academic research, interfacing seamlessly with existing and future systems, platforms, or initiatives. By sourcing data from a comprehensive array of reliable government, association, and private sources, as well as developing proprietary calculations where necessary, the platform ensures high-quality, accurate information. The database and API act as a foundational layer, supporting a wide range of applications from home energy audits to climate research projects.
 
 The platform aggregates and synthesizes dynamic and static data from diverse sources, including but not limited to:
 
-- Government databases for weather and energy production data.
+- Government databases for climate and energy production data.
 - Association standards for appliance efficiencies.
 - Private sector data for fuel and utility costs.
-- Proprietary logic for solar insolation, heating and cooling, water heating, and energy generation.
+- Building science reviewed formulae for estimation of heating, cooling, water heating, and other forms of energy consumption.
 
 This aggregation provides a unique, invaluable resource for developers, researchers, and climate entrepreneurs seeking to create tools and solutions in the residential energy sector.
 
@@ -58,7 +58,7 @@ The platform is intended not only as a standalone solution but also for integrat
 
 ### Product Functions
 
-The core functionalities of the "Residential Home Energy Database & API" include:
+The core functionalities of the "Home Energy Assessment Database & API" include:
 
 - **Data Aggregation**: Compiles information from a variety of sources to offer a comprehensive view of factors affecting residential energy use and efficiency.
 - **API Access**: Provides easy access to this aggregated data through a well-documented and user-friendly API, enabling developers and researchers to integrate this data into their own applications and studies.
@@ -75,7 +75,7 @@ Besides engineers and climate entrepreneurs, the platform is anticipated to serv
 
 ## Operating Environment
 
-The "Residential Home Energy Database & API" is built on a robust, modern technology stack tailored for high performance, scalability, and ease of integration. At its core, the platform utilizes a Node.js framework for the backend, leveraging the Express framework to handle API requests efficiently and MongoDB for data storage. This choice of technologies ensures that the system is both flexible and capable of managing large volumes of data effectively.
+The "Home Energy Assessment Database & API" is built on a robust, modern technology stack tailored for high performance, scalability, and ease of integration. At its core, the platform utilizes a Node.js framework for the backend, leveraging the Express framework to handle API requests efficiently and MongoDB for data storage. This choice of technologies ensures that the system is both flexible and capable of managing large volumes of data effectively.
 
 ## Design and Implementation Constraints
 
