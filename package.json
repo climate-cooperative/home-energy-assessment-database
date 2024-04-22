@@ -1,34 +1,21 @@
 {
-  "name": "zwell_public_api",
+  "name": "climate_cooperative_public_api",
   "version": "1.0.0",
-  "description": "Zwells Open Source API",
+  "description": "Climate_Cooperatives Open Source API",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "test": "jest",
-    "build": "esbuild ./src/lambda.js --bundle --minify --platform=node --target=node20 --outfile=dist/lambda.js"
+    "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Zwell-Home/home-energy-data.git"
-  },
-  "author": "Zwell",
+  "author": "Climate_Cooperative",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Zwell-Home/home-energy-data/issues"
-  },
-  "homepage": "https://github.com/Zwell-Home/home-energy-data#readme",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.549.0",
     "@aws-sdk/lib-dynamodb": "^3.549.0",
     "@codegenie/serverless-express": "^4.14.0",
-    "@faker-js/faker": "^8.4.1",
     "axios": "^1.6.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "i": "^0.3.7",
-    "mongodb": "^6.3.0",
-    "mongoose": "^8.1.0",
     "node-cron": "^3.0.3",
     "npm": "^10.5.1"
   },
