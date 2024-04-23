@@ -1,8 +1,9 @@
 const { DynamoService } = require("../services/dynamo.service")
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
 const { HVAC_TABLE } = require('../constants/tables');
+const { DYNAMO_ENDPOINT } = require("../constants/routes");
 
-const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2' }));
+const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }));
 
 // GET /hvac
 const getAllHvacs = async (req, res) => {

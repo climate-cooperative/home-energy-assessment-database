@@ -4,7 +4,7 @@
   "description": "Climate_Cooperatives Open Source API",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/local.js",
     "test": "jest"
   },
   "author": "Climate_Cooperative",
