@@ -1,0 +1,15 @@
+FROM  node:iron-alpine AS BUILDER
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY src ./src
+
+RUN npm ci
+RUN npm run build
+
+FROM --platform=arm64 public.ecr.aws/lambda/nodejs:20 AS RELEASE
+
+COPY  --from=BUILDER /app/dist/lambda.js ${LAMBDA_TASK_ROOT}
+
+CMD [ "lambda.handler" ]

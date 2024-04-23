@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "test": "jest"
+    "test": "jest",
+    "build": "esbuild ./src/lambda.js --bundle --minify --platform=node --target=node20 --outfile=dist/lambda.js"
   },
   "author": "Climate_Cooperative",
   "license": "ISC",
