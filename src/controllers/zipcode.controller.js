@@ -1,10 +1,11 @@
 const { DynamoService } = require("../services/dynamo.service")
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
 const { ZIPCODE_TABLE } = require('../constants/tables');
+const { DYNAMO_ENDPOINT } = require("../constants/routes");
 
-const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2' }));
+const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }));
 
-const ZIPCODE_GSI = 'prod-zipcode-index';
+const ZIPCODE_GSI = 'zipcode-index';
 
 // GET /zipcode
 const getAllZipcodes = async (req, res) => {

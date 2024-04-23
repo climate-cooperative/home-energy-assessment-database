@@ -1,0 +1,13 @@
+version: '3.8'
+services: 
+  localstack:
+    image: localstack/localstack
+    ports: 
+      - "4566:4566"
+    environment:
+      - SERVICES=dynamodb
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy 
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "./init_dynamodb.sh:/etc/localstack/init/ready.d/init-aws.sh"

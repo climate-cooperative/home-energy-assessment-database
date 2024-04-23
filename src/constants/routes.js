@@ -6,6 +6,8 @@ const STATE_ROUTE = '/state';
 const ZIPCODE_ROUTE = '/zipcode';
 const BIOMASS_ROUTE = '/biomass';
 
+const DYNAMO_ENDPOINT = 'http://localhost:4566'
+
 module.exports = {
   APPLIANCE_ROUTE,
   HVAC_ROUTE,
@@ -13,5 +15,6 @@ module.exports = {
   HOME_TYPE_ROUTE,
   STATE_ROUTE,
   ZIPCODE_ROUTE,
-  BIOMASS_ROUTE
+  BIOMASS_ROUTE,
+  DYNAMO_ENDPOINT
 }

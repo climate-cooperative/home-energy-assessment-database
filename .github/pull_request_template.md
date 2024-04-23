@@ -1,15 +1,3 @@
-## Description
+## Related Issues or Pull Requests
 
-[Add concise description]
-
-## Technical Notes
-
-[Add Technical notes]
-
-## Risks
-
-[Add Risks]
-
-## Related Issues Or Discussions
-
-[...Issues]
+[]
