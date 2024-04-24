@@ -5,8 +5,8 @@
  * The server listens on the port specified by the environment variable PORT, or 5000 if PORT is not set.
  * 
  * @requires express
- * @requires cors
  * @requires dotenv
+ * @requires cors
  * @requires ./routes/api
  */
 
@@ -33,13 +33,8 @@ const { zipcodeRouter } = require('./routes/zipcode.router');
 require('dotenv').config();
 
 const app = express();
-// Middleware
-app.use(cors(
-  {
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
-  }
-));
+
+app.use(cors());
 
 // json parser
 app.use(express.json());
