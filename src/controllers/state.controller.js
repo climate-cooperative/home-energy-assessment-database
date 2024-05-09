@@ -1,6 +1,7 @@
 const { DynamoService } = require("../services/dynamo.service")
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
 const { STATE_TABLE, ZIPCODE_TABLE } = require('../constants/tables');
+const { ZIPCODE_GSI } = require('../constants/indexes');
 const { DYNAMO_ENDPOINT } = require("../constants/routes");
 
 const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }));
@@ -33,7 +34,7 @@ const getStateFromZipCode = async (req, res) => {
   try {
     const zipcode = await dynamoService.getItemGSI(
       ZIPCODE_TABLE,
-      "zipcode-index",
+      ZIPCODE_GSI,
       { zipcode: req.params.zipcode }
     );
     if (zipcode.Items.length === 0) {
