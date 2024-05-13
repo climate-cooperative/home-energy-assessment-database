@@ -182,6 +182,59 @@ awslocal dynamodb put-item \
             }' \
     --region us-west-2
 
+awslocal dynamodb put-item \
+    --table-name state_table \
+    --item '{
+                "_id": { "S": "659c6233d61ba4e1468b5340" },
+                "state": { "S": "New York" },
+                "abbreviation": { "S": "NY" },
+                "state_emissions": {
+                    "L": [
+                    {
+                        "M": {
+                        "co2_lbs/mhw": { "N": "541" },
+                        "co2_lbs/btu": { "N": "0.00015855803048065651" },
+                        "co2_net_emission_estimate": { "S": "11,534" },
+                        "date": { "S": "2022" }
+                        }
+                    }
+                    ]
+                },
+                "state_energy_costs": {
+                    "L": [
+                    {
+                        "M": {
+                        "usd/btu_electricity": { "N": "0.000006652989449003517" },
+                        "usd/btu_natural_gas": { "N": "0.000020969999999999997" },
+                        "usd/btu_propane": { "N": "0.00003582207059441018" },
+                        "usd/btu_fuel_oil": { "N": "0.000030122743682310467" },
+                        "date": { "S": "2023-12-27" }
+                        }
+                    }
+                    ]
+                },
+                "state_energy_breakdown": {
+                    "L": [
+                    {
+                        "M": {
+                        "all_fuels": { "N": "15.6124" },
+                        "natural_gas": { "N": "8.82411" },
+                        "petroleum": { "N": "0.07999" },
+                        "coal": { "N": "0" },
+                        "nuclear": { "N": "0" },
+                        "hydro": { "N": "6.62945" },
+                        "wind": { "N": "0.07885" },
+                        "solar": { "N": "0" },
+                        "other_renewable": { "N": "0" },
+                        "date": { "S": "2023-10" },
+                        "units": { "S": "million MMBtu" }
+                        }
+                    }
+                    ]
+                }
+            }' \
+    --region us-west-2
+
 
 # **** ZIPCODE TABLE ****
 awslocal dynamodb create-table \
