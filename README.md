@@ -1,19 +1,24 @@
 # Home Energy Assessment Database & API Functional Requirements
+
 Welcome to the Climate Cooperative Open Source project! As a social purpose corporation, Climate Cooperative is dedicated to advancing carbon-neutral, sustainable energy solutions for homes. Our mission is to foster diverse, healthy communities by providing innovative and accessible energy efficiency tools and services.
 
 The primary goal of the Home Energy Assessment Database (HEAD) & API is to consolidate diverse data sources into a unified platform that enables accurate calculation of a home's carbon footprint. This calculation will consider various factors, including local energy grid mix, weather conditions, and specific home attributes such as age, size, construction materials, and mechanical systems. The project aims to address the critical need for accessible and reliable data to support the development of home energy savings calculators, enable detailed analyses, and facilitate the creation of visualizations pertaining to residential home energy consumption and efficiency.
 
 This platform seeks to empower climate tech startups, academic researchers, and other stakeholders with the data necessary to innovate, study, and propose solutions aimed at reducing residential energy consumption and its environmental impact. By providing a comprehensive and easily accessible API, the project aspires to catalyze advancements in home energy efficiency, support policy development, and contribute to a more sustainable future.
 
-# Document Conventions
+## Local Development
 
-This document will follow standard conventions for a Functional Requirements Document to ensure clarity and consistency. These include:
+*Make sure you have docker running locally*
 
-- **Bold Text**: Used for headings, titles, and to emphasize key points.
-- *Italic Text*: Indicates new terms or phrases that are defined in the glossary section.
-- Bullet Points: Used for lists, features, and requirements to improve readability.
-- `Code Blocks`: When referencing API endpoints or code snippets, these will be presented in a monospaced font.
-- [MUST, SHOULD, MAY]: These keywords are used to describe the necessity of requirements, following the conventions of RFC 2119. "MUST" indicates a requirement that is essential and mandatory for the system's functionality. "SHOULD" indicates a recommendation that is highly encouraged but not strictly required. "MAY" suggests optional features or functionalities.
+Lets keep this simple.
+
+`./start_local.sh`
+
+### Local Stack
+
+We use [localstack](https://docs.localstack.cloud/user-guide/aws/dynamodb/) to emulate dynamodb locally so we don't need to connect to a real database when dveloping.
+
+Data and tables are hydrated in `init_dynamodb.sh`. Feel free to add data as you want to enable better dev experience.
 
 ## Intended Audience and Reading Suggestions
 

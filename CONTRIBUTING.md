@@ -2,6 +2,54 @@
 
 We welcome contributions of all forms including bug reports, code, documentation, and feedback. Your contributions help make Zwell a better project and advance our mission of fostering sustainable energy solutions.
 
+## Contributing
+
+Simply fork the [main branch](https://github.com/climate-cooperative/home-energy-assessment-database) into your own a account, and abide by the following conventions.
+
+### Pull Requests
+
+**Pull Request onced approved will be merged in upon approval by code maintainers.**
+
+Pull Requests are used to initiate the process of merging code into the [main branch](https://github.com/climate-cooperative/home-energy-assessment-database).
+
+1. Under Pull requests tab
+2. New Pull Request
+3. Configure comparison
+    - Left Hand Side = `base repository: climate-cooperative/home-energy-assessment-database` `base: main`
+    - Right Hand Side = `base repository: <your_fork>` `base: <your_feature_branch>`
+
+*Take this moment to review the file changes themselves. Make sure to have the most recent pushes to main merged in `git merge main`*
+
+4. Create Pull Request
+5. **IMPORTANT** Fill out the PR title/description provided template with as much information as possible. Make sure to link relevant issue/s and users for review.
+
+### Branches
+
+Climate Coorporation uses a feature branching convention. Each Pull-Request should be from a new branch, checked out from main, targeting a specific Issue.
+
+Please follow these naming conventions
+
+- Include Type of Feature [`feature`, `bug`, `refactor`, `fix`]
+- Include [Issue](https://github.com/climate-cooperative/home-energy-assessment-database/issues) Number
+- Simple Descriptive Names
+
+> **feature/01-sample-branch**
+
+### Keep your main up-to-date with Climate-Corp main!
+
+It is important to keep your main updated with the [main branch](https://github.com/climate-cooperative/home-energy-assessment-database). Especially when making PR's and avoiding uneccessary commit history. These keep PR's small, which makes code reviews faster!
+
+1. In your **home-energy-assessment-database** click `Sync fork` to sync your main.
+2. In your feature branch merge in your main.
+
+```(shell)
+  // in main (git switch main)
+  git switch <your_branch>
+  git merge main
+```
+
+*Can also be done from the cli, with pull/push*
+
 ## Reporting Issues
 
 Your reports are valuable in improving the project. Here's how to make them effective:
@@ -32,20 +80,5 @@ We appreciate code contributions. Here are some guidelines:
 - **No External Code**: Don't submit code you didn't write without discussing it first.
 - **No License Changes**: Don't submit PRs that change licensing files or headers.
 - **Discuss New APIs**: Before adding new APIs, file an issue and discuss it with the community.
-
-## Workflow
-
-To contribute, follow these steps:
-
-1. **Issue Creation**: For significant changes, create an issue to discuss the proposal. You can skip this for trivial changes.
-2. **Fork and Branch**: Fork the repository and create a branch for your work (`git checkout -b my-branch`).
-3. **Implement Changes**: Make your changes in your branch. Include tests and ensure your code adheres to the project's style.
-4. **PR Submission**: Submit a pull request to the main branch. Link the issue your PR addresses.
-5. **CI Checks**: Ensure the Continuous Integration (CI) checks pass.
-6. **Review and Merge**: Wait for feedback from the project maintainers. Once approved and checks pass, your PR will be merged.
-
-## Continuous Integration (CI)
-
-Our CI process automatically builds and tests PRs. Ensure your changes pass all checks. If the CI fails, use the provided link in the PR issue to diagnose and fix any issues.
 
 Thank you for contributing to Zwell Open Source Project! Together, we can make a significant impact on creating sustainable and accessible energy solutions.
