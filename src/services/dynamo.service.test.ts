@@ -1,6 +1,6 @@
-const { DynamoService } = require('./dynamo.service');
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { APPLIANCE_TABLE } = require('../constants/tables');
+import { DynamoService } from './dynamo.service';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { APPLIANCE_TABLE } from '../constants/tables';
 
 const client = new DynamoDBClient({ region: 'us-west-2' });
 const documentServcie = new DynamoService(client);

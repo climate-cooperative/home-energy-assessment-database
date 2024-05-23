@@ -1,4 +1,6 @@
-const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb')
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+
+import { DynamoDBDocument, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 
 // Zwell-home-energy-api is acts as a service layer for reading from dynamo
 // This service only needs READ operations
@@ -8,21 +10,21 @@ const { DynamoDBDocument } = require('@aws-sdk/lib-dynamodb')
 // "dynamodb:GetItem",
 // "dynamodb:Query",
 // "dynamodb:Scan"
-class DynamoService {
+export class DynamoService {
   docClient;
 
-  constructor(client) {
+  constructor(client: DynamoDBClient) {
     this.docClient = DynamoDBDocument.from(client);
   }
 
-  async getAll(table) {
+  async getAll(table: string) {
     return await this.docClient.scan({
       TableName: table
     });
   }
 
-  async getItemGSI(table, index, query) {
-    const command = {
+  async getItemGSI(table: string, index: string, query: any) {
+    const command: QueryCommandInput = {
       TableName: table,
       IndexName: index,
       Select: 'ALL_ATTRIBUTES',
@@ -35,8 +37,8 @@ class DynamoService {
     return await this.docClient.query(command);
   }
 
-  async getItem(table, query) {
-    const command = {
+  async getItem(table: string, query: any) {
+    const command: QueryCommandInput = {
       TableName: table,
       FilterExpression: DynamoService.buildScanExpression(query),
       ExpressionAttributeValues: DynamoService.buildScanAttributeValues(query),
@@ -48,16 +50,16 @@ class DynamoService {
     return await this.docClient.scan(command);
   }
 
-  async getItemComplex(table, expression, attribute) {
+  async getItemComplex(table: string, expression: any, attribute: any) {
     return await this.docClient.scan({
       TableName: table,
       FilterExpression: expression,
-      ExpressionAttributeValues: attributes,
+      ExpressionAttributeValues: attribute,
       Select: 'ALL_ATTRIBUTES'
     });
   }
 
-  static buildScanExpression(query) {
+  static buildScanExpression(query: any) {
     const expressions = [];
     for (const key in query) {
       expressions.push(`#${key} = :${key}`);
@@ -66,8 +68,8 @@ class DynamoService {
     return expressions.join(' AND ')
   }
 
-  static buildScanAttributeValues(query) {
-    const attributes = {};
+  static buildScanAttributeValues(query: any) {
+    const attributes: any = {};
     for (const key in query) {
      attributes[`:${key}`] = query[key]
     }
@@ -75,8 +77,8 @@ class DynamoService {
     return attributes;
   }
 
-  static buildScanAttributeNames(query) {
-    const names = {};
+  static buildScanAttributeNames(query: any) {
+    const names: any = {};
     for (const key in query) {
      names[`#${key}`] = key
     }
@@ -85,5 +87,3 @@ class DynamoService {
   }
 
 }
-
-module.exports = { DynamoService }
