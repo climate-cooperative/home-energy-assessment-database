@@ -1,23 +1,24 @@
-const { DynamoService } = require("../services/dynamo.service")
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
-const { STATE_TABLE, ZIPCODE_TABLE } = require('../constants/tables');
-const { ZIPCODE_GSI } = require('../constants/indexes');
-const { DYNAMO_ENDPOINT } = require("../constants/routes");
+import { DynamoService } from "../services/dynamo.service"
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { STATE_TABLE, ZIPCODE_TABLE } from '../constants/tables'
+import { ZIPCODE_GSI } from '../constants/indexes'
+import { DYNAMO_ENDPOINT } from "../constants/routes"
+import { Request, Response } from 'express'
 
 const dynamoService = new DynamoService(new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }));
 
 // GET /state
-const getAllStates = async (req, res) => {
+export const getAllStates = async (res: Response, req: Request) => {
   try {
     const states = await dynamoService.getAll(STATE_TABLE);
     res.json(states.Items);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: (err as Error).message });
   }
 }
 
 // GET /state/:name
-const getState = async (req, res) => {
+export const getState = async (res: Response, req: Request) => {
   try {
     const state = await dynamoService.getItem(
       STATE_TABLE,
@@ -25,19 +26,19 @@ const getState = async (req, res) => {
     );
     res.json(state.Items);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: (err as Error).message });
   }
 }
 
 // GET /state/from-zip-code/:zipcode
-const getStateFromZipCode = async (req, res) => {
+export const getStateFromZipCode = async (res: Response, req: Request) => {
   try {
     const zipcode = await dynamoService.getItemGSI(
       ZIPCODE_TABLE,
       ZIPCODE_GSI,
       { zipcode: req.params.zipcode }
     );
-    if (zipcode.Items.length === 0) {
+    if (!zipcode.Items) {
       res.json([]);
       return;
     }
@@ -47,8 +48,6 @@ const getStateFromZipCode = async (req, res) => {
     });
     res.json(state.Items);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: (err as Error).message });
   }
-};
-
-module.exports = { getState, getAllStates, getStateFromZipCode };
+}
