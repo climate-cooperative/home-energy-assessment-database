@@ -4,8 +4,11 @@
   "description": "Climate_Cooperatives Open Source API",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/local.js",
-    "test": "jest"
+    "test": "jest",
+    "build": "esbuild ./src/local.ts --bundle --platform=node --outdir=dist",
+    "start:local": "node dist/local.js",
+    "build:start:local": "npm run build & npm run start:local",
+    "format": "prettier --config ./prettierrc 'src/**/*.ts' --write"
   },
   "author": "Climate_Cooperative",
   "license": "ISC",
@@ -22,12 +25,20 @@
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
+    "@babel/preset-typescript": "^7.24.1",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.12",
     "babel-jest": "^29.7.0",
     "dotenv": "^16.3.1",
     "esbuild": "^0.20.2",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "jest": "^29.7.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

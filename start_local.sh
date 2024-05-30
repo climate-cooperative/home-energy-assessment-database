@@ -5,4 +5,4 @@ export AWS_SECRET_ACCESS_KEY=dummy
 
 docker-compose up -d localstack
 
-npm start
+npm run build:start:local
