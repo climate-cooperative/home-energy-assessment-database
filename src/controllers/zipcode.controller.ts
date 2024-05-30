@@ -3,14 +3,14 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { ZIPCODE_TABLE } from '../constants/tables';
 import { ZIPCODE_GSI } from '../constants/indexes';
 import { DYNAMO_ENDPOINT } from '../constants/routes';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 const dynamoService = new DynamoService(
   new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
 );
 
 // GET /zipcode
-export const getAllZipcodes = async (req: Request, res: Response) => {
+export const getAllZipcodes = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const zipcodes = await dynamoService.getAll(ZIPCODE_TABLE);
     res.json(zipcodes.Items);
@@ -20,7 +20,7 @@ export const getAllZipcodes = async (req: Request, res: Response) => {
 };
 
 // GET /zipcode/:value
-export const getZipcode = async (req: Request, res: Response) => {
+export const getZipcode = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const zipcode = await dynamoService.getItemGSI(ZIPCODE_TABLE, ZIPCODE_GSI, {
       zipcode: req.params.value,
