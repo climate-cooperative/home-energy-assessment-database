@@ -9,7 +9,11 @@ const dynamoService = new DynamoService(
 );
 
 // GET /home_type
-export const getAllHomeTypes = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllHomeTypes = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const homeTypes = await dynamoService.getAll(HOME_TYPE_TABLE);
     res.json(homeTypes.Items);
@@ -19,7 +23,11 @@ export const getAllHomeTypes = async (req: Request, res: Response, next: NextFun
 };
 
 // GET /home_type/:type
-export const getHomeType = async (req: Request, res: Response, next: NextFunction) => {
+export const getHomeType = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const homeType = await dynamoService.getItem(HOME_TYPE_TABLE, {
       home_type: req.params.type,

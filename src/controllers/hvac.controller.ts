@@ -9,7 +9,11 @@ const dynamoService = new DynamoService(
 );
 
 // GET /hvac
-export const getAllHvacs = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllHvacs = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const hvacs = await dynamoService.getAll(HVAC_TABLE);
     res.json(hvacs.Items);
@@ -19,7 +23,11 @@ export const getAllHvacs = async (req: Request, res: Response, next: NextFunctio
 };
 
 // GET /hvac/:name
-export const getHvac = async (req: Request, res: Response, next: NextFunction) => {
+export const getHvac = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const hvac = await dynamoService.getItem(HVAC_TABLE, {
       display_name: req.params.name,

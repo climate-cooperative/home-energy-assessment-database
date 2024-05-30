@@ -9,7 +9,11 @@ const dynamoService = new DynamoService(
 );
 
 // GET /biomass
-export const getAllBiomass = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllBiomass = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const biomasses = await dynamoService.getAll(BIOMASS_TABLE);
     res.json(biomasses.Items);
@@ -19,7 +23,11 @@ export const getAllBiomass = async (req: Request, res: Response, next: NextFunct
 };
 
 // GET /biomass/:name
-export const getBiomass = async (req: Request, res: Response, next: NextFunction) => {
+export const getBiomass = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const biomass = await dynamoService.getItem(BIOMASS_TABLE, {
       name: req.params.name,

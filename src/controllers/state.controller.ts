@@ -10,7 +10,11 @@ const dynamoService = new DynamoService(
 );
 
 // GET /state
-export const getAllStates = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllStates = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const states = await dynamoService.getAll(STATE_TABLE);
     res.json(states.Items);
@@ -20,7 +24,11 @@ export const getAllStates = async (req: Request, res: Response, next: NextFuncti
 };
 
 // GET /state/:name
-export const getState = async (req: Request, res: Response, next: NextFunction) => {
+export const getState = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const state = await dynamoService.getItem(STATE_TABLE, {
       state: req.params.name,
@@ -32,7 +40,11 @@ export const getState = async (req: Request, res: Response, next: NextFunction) 
 };
 
 // GET /state/from-zip-code/:zipcode
-export const getStateFromZipCode = async (req: Request, res: Response, next: NextFunction) => {
+export const getStateFromZipCode = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const zipcode = await dynamoService.getItemGSI(ZIPCODE_TABLE, ZIPCODE_GSI, {
       zipcode: req.params.zipcode,

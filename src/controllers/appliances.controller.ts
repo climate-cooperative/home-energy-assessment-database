@@ -9,7 +9,11 @@ const dynamoService = new DynamoService(
 );
 
 // GET /appliances
-export const getAllAppliances = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllAppliances = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const applainces = await dynamoService.getAll(APPLIANCE_TABLE);
     res.json(applainces.Items);
@@ -19,7 +23,11 @@ export const getAllAppliances = async (req: Request, res: Response, next: NextFu
 };
 
 // GET /appliances/:name
-export const getAppliance = async (req: Request, res: Response, next: NextFunction) => {
+export const getAppliance = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const applaince = await dynamoService.getItem(APPLIANCE_TABLE, {
       appliance: req.params.name,

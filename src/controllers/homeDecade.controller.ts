@@ -9,7 +9,11 @@ const dynamoService = new DynamoService(
 );
 
 // GET /home_decade
-export const getAllHomeDecades = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllHomeDecades = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const hpmeDecades = await dynamoService.getAll(HOME_DECADE_TABLE);
     res.json(hpmeDecades.Items);
@@ -19,7 +23,11 @@ export const getAllHomeDecades = async (req: Request, res: Response, next: NextF
 };
 
 // GET /home_decade/:decade
-export const getHomeDecade = async (req: Request, res: Response, next: NextFunction) => {
+export const getHomeDecade = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const homeDecade = await dynamoService.getItem(HOME_DECADE_TABLE, {
       decade: req.params.decade,

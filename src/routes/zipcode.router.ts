@@ -8,7 +8,6 @@ const dynamoService = new DynamoService(
   new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
 );
 
-const controller = new ZipcodeController(dynamoService)
+const controller = new ZipcodeController(dynamoService);
 
 export const zipcodeRouter = Router().get('/:value', controller.getZipcode);
-// .get('/', getAllZipcodes);
