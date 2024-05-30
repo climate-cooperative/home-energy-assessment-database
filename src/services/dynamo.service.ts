@@ -1,10 +1,10 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 import { DynamoDBDocument, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 
 // Zwell-home-energy-api is acts as a service layer for reading from dynamo
 // This service only needs READ operations
-// 
+//
 // Dynamo Allowed Operations:
 // "dynamodb:BatchGetItem",
 // "dynamodb:GetItem",
@@ -19,7 +19,7 @@ export class DynamoService {
 
   async getAll(table: string) {
     return await this.docClient.scan({
-      TableName: table
+      TableName: table,
     });
   }
 
@@ -31,7 +31,7 @@ export class DynamoService {
       KeyConditionExpression: DynamoService.buildScanExpression(query),
       ExpressionAttributeValues: DynamoService.buildScanAttributeValues(query),
       ExpressionAttributeNames: DynamoService.buildScanAttributeNames(query),
-    }
+    };
 
     console.log(command);
     return await this.docClient.query(command);
@@ -43,8 +43,8 @@ export class DynamoService {
       FilterExpression: DynamoService.buildScanExpression(query),
       ExpressionAttributeValues: DynamoService.buildScanAttributeValues(query),
       ExpressionAttributeNames: DynamoService.buildScanAttributeNames(query),
-      Select: 'ALL_ATTRIBUTES'
-    }
+      Select: 'ALL_ATTRIBUTES',
+    };
 
     console.log(command);
     return await this.docClient.scan(command);
@@ -55,7 +55,7 @@ export class DynamoService {
       TableName: table,
       FilterExpression: expression,
       ExpressionAttributeValues: attribute,
-      Select: 'ALL_ATTRIBUTES'
+      Select: 'ALL_ATTRIBUTES',
     });
   }
 
@@ -65,13 +65,13 @@ export class DynamoService {
       expressions.push(`#${key} = :${key}`);
     }
 
-    return expressions.join(' AND ')
+    return expressions.join(' AND ');
   }
 
   static buildScanAttributeValues(query: any) {
     const attributes: any = {};
     for (const key in query) {
-     attributes[`:${key}`] = query[key]
+      attributes[`:${key}`] = query[key];
     }
 
     return attributes;
@@ -80,10 +80,9 @@ export class DynamoService {
   static buildScanAttributeNames(query: any) {
     const names: any = {};
     for (const key in query) {
-     names[`#${key}`] = key
+      names[`#${key}`] = key;
     }
 
     return names;
   }
-
 }

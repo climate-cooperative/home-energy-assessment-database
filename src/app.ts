@@ -1,5 +1,5 @@
-import express, { Request, Response } from 'express'
-import cors from 'cors'
+import express, { Request, Response } from 'express';
+import cors from 'cors';
 import {
   APPLIANCE_ROUTE,
   HVAC_ROUTE,
@@ -7,16 +7,16 @@ import {
   HOME_TYPE_ROUTE,
   STATE_ROUTE,
   ZIPCODE_ROUTE,
-  BIOMASS_ROUTE
-} from './constants/routes'
+  BIOMASS_ROUTE,
+} from './constants/routes';
 
-import { applianceRouter } from './routes/appliance.router'
-import { biomassRouter } from './routes/biomass.router'
-import { homeDecadeRouter } from './routes/homeDecade.router'
-import { homeTypeRouter } from './routes/homeType.router'
-import { hvacRouter } from './routes/hvac.router'
-import { stateRouter } from './routes/state.route'
-import { zipcodeRouter } from './routes/zipcode.router'
+import { applianceRouter } from './routes/appliance.router';
+import { biomassRouter } from './routes/biomass.router';
+import { homeDecadeRouter } from './routes/homeDecade.router';
+import { homeTypeRouter } from './routes/homeType.router';
+import { hvacRouter } from './routes/hvac.router';
+import { stateRouter } from './routes/state.route';
+import { zipcodeRouter } from './routes/zipcode.router';
 
 require('dotenv').config();
 
@@ -42,4 +42,4 @@ app.use(HVAC_ROUTE, hvacRouter);
 app.use(STATE_ROUTE, stateRouter);
 app.use(ZIPCODE_ROUTE, zipcodeRouter);
 
-export { app }
+export { app };

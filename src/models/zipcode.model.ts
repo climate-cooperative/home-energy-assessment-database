@@ -10,19 +10,18 @@ export interface ZipcodeModel {
 }
 
 export interface DegreeDay {
-  heating_degree_days: number
-  cooling_degree_days: number
-  site: Site
+  heating_degree_days: number;
+  cooling_degree_days: number;
+  site: Site;
 }
 
 export interface WaterTempDate {
   water_temperature: number;
   site: Site;
-  
 }
 
 interface Site {
-  site_id: string
-  site_name: string
-  station_distance: number
+  site_id: string;
+  site_name: string;
+  station_distance: number;
 }

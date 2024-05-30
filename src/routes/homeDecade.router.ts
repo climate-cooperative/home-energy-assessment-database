@@ -1,8 +1,8 @@
-import  { Router } from 'express'
-import  {
+import { Router } from 'express';
+import {
   getAllHomeDecades,
-  getHomeDecade
-} from '../controllers/homeDecade.controller'
+  getHomeDecade,
+} from '../controllers/homeDecade.controller';
 
 export const homeDecadeRouter = Router()
   .get('/', getAllHomeDecades)

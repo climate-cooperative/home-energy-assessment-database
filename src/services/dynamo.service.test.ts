@@ -7,12 +7,12 @@ const documentServcie = new DynamoService(client);
 
 describe('dynamoService', () => {
   test('buildScanExpression should build filterExpression for ScanCommand', () => {
-    const result = DynamoService.buildScanExpression({ "name": "test" });
+    const result = DynamoService.buildScanExpression({ name: 'test' });
     expect(result).toBe('#name = :name');
-  })
+  });
 
   test('buildScanAttributes should build ExpressionAttributeValues for ScanCommand', () => {
-    const result = DynamoService.buildScanAttributeValues({ "name": "test" });
+    const result = DynamoService.buildScanAttributeValues({ name: 'test' });
     expect(result).toEqual({ ':name': 'test' });
   });
 
@@ -29,5 +29,4 @@ describe('dynamoService', () => {
   //   console.log(result);
   //   expect(result.Count).toBe(1);
   // })
-
 });

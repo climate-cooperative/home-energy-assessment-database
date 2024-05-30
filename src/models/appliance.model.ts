@@ -1,4 +1,4 @@
-export interface  ApplianceModel {
+export interface ApplianceModel {
   _id: string;
   applaince: string;
   fule_type: string;

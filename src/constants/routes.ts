@@ -6,4 +6,4 @@ export const STATE_ROUTE = '/state';
 export const ZIPCODE_ROUTE = '/zipcode';
 export const BIOMASS_ROUTE = '/biomass';
 
-export const DYNAMO_ENDPOINT = 'http://localhost:4566'
+export const DYNAMO_ENDPOINT = 'http://localhost:4566';

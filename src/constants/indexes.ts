@@ -1,1 +1,1 @@
-export const ZIPCODE_GSI = "zipcode-index";
+export const ZIPCODE_GSI = 'zipcode-index';

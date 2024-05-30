@@ -2,7 +2,7 @@ export interface StateModel {
   _id: string;
   state: string;
   abbreviation: string;
-  state_emissions: StateEmission[]; 
+  state_emissions: StateEmission[];
   state_energy_costs: StateEnergyCost[];
   state_energy_breakdown: StateEnergyBreakdown[];
 }
@@ -15,11 +15,11 @@ export interface StateEmission {
 }
 
 export interface StateEnergyCost {
-  "usd/btu_electricity": number;
-  "usd/btu_natural_gas": number;
-  "usd/btu_propane": number;
-  "usd/btu_fuel_oil": number;
-  "date": string;
+  'usd/btu_electricity': number;
+  'usd/btu_natural_gas': number;
+  'usd/btu_propane': number;
+  'usd/btu_fuel_oil': number;
+  date: string;
 }
 
 export interface StateEnergyBreakdown {
