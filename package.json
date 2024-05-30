@@ -5,6 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "build": "esbuild ./src/local.ts --bundle --platform=node --outdir=dist",
     "start:local": "node dist/local.js",
     "build:start:local": "npm run build && npm run start:local",

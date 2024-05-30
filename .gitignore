@@ -24,3 +24,5 @@ build/
 ./data/containers
 
 volume/
+
+coverage/
