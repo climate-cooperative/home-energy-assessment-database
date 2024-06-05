@@ -2,14 +2,18 @@ import { DynamoService } from '../services/dynamo.service';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { BIOMASS_TABLE } from '../constants/tables';
 import { DYNAMO_ENDPOINT } from '../constants/routes';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 const dynamoService = new DynamoService(
   new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
 );
 
 // GET /biomass
-export const getAllBiomass = async (req: Request, res: Response) => {
+export const getAllBiomass = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const biomasses = await dynamoService.getAll(BIOMASS_TABLE);
     res.json(biomasses.Items);
@@ -19,7 +23,11 @@ export const getAllBiomass = async (req: Request, res: Response) => {
 };
 
 // GET /biomass/:name
-export const getBiomass = async (req: Request, res: Response) => {
+export const getBiomass = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const biomass = await dynamoService.getItem(BIOMASS_TABLE, {
       name: req.params.name,

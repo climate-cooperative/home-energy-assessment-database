@@ -33,7 +33,6 @@ export class DynamoService {
       ExpressionAttributeNames: DynamoService.buildScanAttributeNames(query),
     };
 
-    console.log(command);
     return await this.docClient.query(command);
   }
 
@@ -46,7 +45,6 @@ export class DynamoService {
       Select: 'ALL_ATTRIBUTES',
     };
 
-    console.log(command);
     return await this.docClient.scan(command);
   }
 

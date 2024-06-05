@@ -2,14 +2,18 @@ import { DynamoService } from '../services/dynamo.service';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { HVAC_TABLE } from '../constants/tables';
 import { DYNAMO_ENDPOINT } from '../constants/routes';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 const dynamoService = new DynamoService(
   new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
 );
 
 // GET /hvac
-export const getAllHvacs = async (req: Request, res: Response) => {
+export const getAllHvacs = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const hvacs = await dynamoService.getAll(HVAC_TABLE);
     res.json(hvacs.Items);
@@ -19,7 +23,11 @@ export const getAllHvacs = async (req: Request, res: Response) => {
 };
 
 // GET /hvac/:name
-export const getHvac = async (req: Request, res: Response) => {
+export const getHvac = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const hvac = await dynamoService.getItem(HVAC_TABLE, {
       display_name: req.params.name,
