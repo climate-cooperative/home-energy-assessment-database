@@ -4,16 +4,13 @@ import { ZIPCODE_GSI } from '../constants/indexes';
 import { NextFunction, Request, Response } from 'express';
 import { BasicError, DynamoError } from '../constants/exceptions';
 import { ZipcodeModel } from '../models/zipcode.model';
+import { container, TYPES } from '../config/inversify.config';
+import { DbService } from '../services/db.service';
 
-export class ZipcodeController {
-  private dynamoService: DynamoService;
-
-  constructor(dynamoService: DynamoService) {
-    this.dynamoService = dynamoService;
-  }
+const dbService = container.get<DbService>(TYPES.DB_CLIENT);
 
   // GET /zipcode/:value
-  public getZipcode = async (
+  export const getZipcode = async (
     req: Request,
     res: Response,
     next: NextFunction,
@@ -30,42 +27,33 @@ export class ZipcodeController {
     }
 
     try {
-      const result = await this.dynamoService.getItemGSI(
+      const result = await dbService.getItem(
         ZIPCODE_TABLE,
-        ZIPCODE_GSI,
         {
           zipcode: zipcode,
         },
       );
 
-      // catch all for non 200 responses
-      if (result.$metadata.httpStatusCode !== 200) {
-        throw new DynamoError(
-          'error retrieving zipcode',
-          result.$metadata.httpStatusCode!,
-        );
-      }
-
       res.json(
-        result.Items?.length! > 0
-          ? result.Items
-          : await this.getClosestZipcode(zipcode),
+        result.length! > 0
+          ? result
+          : await getClosestZipcode(zipcode),
       );
     } catch (err) {
       res.status(500).json({ message: (err as Error).message });
     }
   };
 
-  public getClosestZipcode = async (
+  const getClosestZipcode = async (
     zipcode: string,
   ): Promise<ZipcodeModel[]> => {
     // get whichever one hits first
     let tracker = 1;
-    let upResult = await this.callDynamo(parseInt(zipcode) + tracker);
-    let downresult = await this.callDynamo(parseInt(zipcode) - tracker);
+    let upResult = await callDynamo(parseInt(zipcode) + tracker);
+    let downresult = await callDynamo(parseInt(zipcode) - tracker);
     while (upResult.length <= 0 && downresult.length <= 0) {
-      upResult = await this.callDynamo(parseInt(zipcode) + tracker);
-      downresult = await this.callDynamo(parseInt(zipcode) - tracker);
+      upResult = await callDynamo(parseInt(zipcode) + tracker);
+      downresult = await callDynamo(parseInt(zipcode) - tracker);
 
       tracker++;
     }
@@ -76,19 +64,17 @@ export class ZipcodeController {
     return downresult;
   };
 
-  private callDynamo = async (prevZipcode: number): Promise<ZipcodeModel[]> => {
-    const result = await this.dynamoService.getItemGSI(
+  const callDynamo = async (prevZipcode: number): Promise<ZipcodeModel[]> => {
+    const result = await dbService.getItem(
       ZIPCODE_TABLE,
-      ZIPCODE_GSI,
       {
         zipcode: prevZipcode.toString(),
       },
     );
 
-    if (result.Items?.length! > 0) {
-      return result.Items as ZipcodeModel[];
+    if (result.length! > 0) {
+      return result as ZipcodeModel[];
     }
 
     return [];
   };
-}

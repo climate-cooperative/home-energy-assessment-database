@@ -2,14 +2,6 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 import { DynamoDBDocument, QueryCommandInput } from '@aws-sdk/lib-dynamodb';
 
-// Zwell-home-energy-api is acts as a service layer for reading from dynamo
-// This service only needs READ operations
-//
-// Dynamo Allowed Operations:
-// "dynamodb:BatchGetItem",
-// "dynamodb:GetItem",
-// "dynamodb:Query",
-// "dynamodb:Scan"
 export class DynamoService {
   docClient;
 

@@ -1,12 +1,9 @@
-import { DynamoService } from '../services/dynamo.service';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { HOME_DECADE_TABLE } from '../constants/tables';
-import { DYNAMO_ENDPOINT } from '../constants/routes';
 import { NextFunction, Request, Response } from 'express';
+import { container, TYPES } from '../config/inversify.config';
+import { DbService } from '../services/db.service';
 
-const dynamoService = new DynamoService(
-  new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
-);
+const dbService = container.get<DbService>(TYPES.DB_CLIENT);
 
 // GET /home_decade
 export const getAllHomeDecades = async (
@@ -15,8 +12,8 @@ export const getAllHomeDecades = async (
   next: NextFunction,
 ) => {
   try {
-    const hpmeDecades = await dynamoService.getAll(HOME_DECADE_TABLE);
-    res.json(hpmeDecades.Items);
+    const hpmeDecades = await dbService.getAllItems(HOME_DECADE_TABLE);
+    res.json(hpmeDecades);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
@@ -29,10 +26,10 @@ export const getHomeDecade = async (
   next: NextFunction,
 ) => {
   try {
-    const homeDecade = await dynamoService.getItem(HOME_DECADE_TABLE, {
+    const homeDecade = await dbService.getItem(HOME_DECADE_TABLE, {
       decade: req.params.decade,
     });
-    res.json(homeDecade.Items);
+    res.json(homeDecade);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
