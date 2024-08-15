@@ -44,7 +44,7 @@ const dbService = container.get<DbService>(TYPES.DB_CLIENT);
     }
   };
 
-  const getClosestZipcode = async (
+  export const getClosestZipcode = async (
     zipcode: string,
   ): Promise<ZipcodeModel[]> => {
     // get whichever one hits first
