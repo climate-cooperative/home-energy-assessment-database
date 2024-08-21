@@ -43,9 +43,9 @@ export const getStateFromZipCode = async (
   next: NextFunction,
 ) => {
   try {
-    const zipcode = await dbService.getItem(ZIPCODE_TABLE, {
-      zipcode: req.params.zipcode
-    }) as ZipcodeModel[];
+    const zipcode = (await dbService.getItem(ZIPCODE_TABLE, {
+      zipcode: req.params.zipcode,
+    })) as ZipcodeModel[];
     if (!zipcode) {
       res.json([]);
       return;

@@ -13,7 +13,7 @@ const mockDynamoHit: QueryCommandOutput = {
   $metadata: {
     httpStatusCode: 200,
   },
-  Items: [{ zipcode: 'blah' }]
+  Items: [{ zipcode: 'blah' }],
 };
 
 const mockDynamoService = { getItem: jest.fn() };

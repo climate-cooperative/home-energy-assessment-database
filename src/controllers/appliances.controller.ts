@@ -26,9 +26,8 @@ export const getAppliance = async (
   next: NextFunction,
 ) => {
   try {
-
     const applaince = await dbService.getItem(APPLIANCE_TABLE, {
-      appliance: req.params.name
+      appliance: req.params.name,
     });
     res.json(applaince);
   } catch (err) {

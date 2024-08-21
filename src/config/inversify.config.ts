@@ -11,31 +11,29 @@ console.log('Standing up ioc container');
 const container = new Container();
 
 // using the env, determine and configure db service to use
-const determineDBService = ():DbService => {
-    const dbType = process.env['DATA_SOURCE'] || null;
+const determineDBService = (): DbService => {
+  console.log('Configuring DB Service');
+  const dbType = process.env['DATA_SOURCE'] || null;
 
-    console.log(dbType);
-    switch (dbType) {
-        case 'DYNAMODB':
-        return DynamoService2.factory(process.env);
-    }
-    console.log('Configuring DB Service');
+  switch (dbType) {
+    case 'DYNAMODB':
+      return DynamoService2.factory(process.env);
+  }
 
-    throw new Error("unable to configure database client");
-}
+  throw new Error('unable to configure database client');
+};
 
 export const TYPES = {
-    DB_CLIENT : 'DB_CLIENT'
-}
-
-
+  DB_CLIENT: 'DB_CLIENT',
+};
 
 // bind db service to container
-container.bind<DbService>(TYPES.DB_CLIENT).toConstantValue(determineDBService());
+container
+  .bind<DbService>(TYPES.DB_CLIENT)
+  .toConstantValue(determineDBService());
 
 // process .env file to configure injectables
 
 // const x = container.get<DbService>(TYPES.DB_CLIENT);
-
 
 export { container };
