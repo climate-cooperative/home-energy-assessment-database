@@ -56,7 +56,6 @@ export class DynamoService2 implements DbService {
   };
 
   public getAllItems = async (table: string) => {
-    console.log(`getting all from ${table}`);
     const x = await this.client.scan({
       TableName: table,
     });

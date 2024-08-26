@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import 'dotenv/config';
 import { DbService } from '../services/db.service';
 import { DynamoService2 } from '../services/dynamo.service2';
+import { DbServiceMock } from '../__mocks__/dbService.mock';
 
 // inversify is a good way to handle ioc and di
 // can also help with setup depending on config
@@ -15,12 +16,15 @@ const determineDBService = (): DbService => {
   console.log('Configuring DB Service');
   const dbType = process.env['DATA_SOURCE'] || null;
 
+
   switch (dbType) {
     case 'DYNAMODB':
       return DynamoService2.factory(process.env);
+    case 'UNIT':
+        return DbServiceMock.factory();
   }
 
-  throw new Error('unable to configure database client');
+  throw new Error('unable to configure database client' + dbType);
 };
 
 export const TYPES = {

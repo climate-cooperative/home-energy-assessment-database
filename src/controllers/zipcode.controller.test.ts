@@ -1,41 +1,22 @@
-import { DynamoService } from '../services/dynamo.service';
-import { getClosestZipcode } from './zipcode.controller';
+import { getMockReq, getMockRes } from '@jest-mock/express'
+import { getClosestZipcode, getZipcode } from './zipcode.controller';
 import { QueryCommandOutput } from '@aws-sdk/lib-dynamodb';
+// import 'dotenv/config';
 
-const mockDynamoMiss: QueryCommandOutput = {
-  $metadata: {
-    httpStatusCode: 200,
-  },
-  Items: [],
-};
+const oldEnv = process.env;
 
-const mockDynamoHit: QueryCommandOutput = {
-  $metadata: {
-    httpStatusCode: 200,
-  },
-  Items: [{ zipcode: 'blah' }],
-};
+const { res, next } = getMockRes();
 
-const mockDynamoService = { getItem: jest.fn() };
 
-// TODO: inject a mocked version of dbservice
-// - mock env vars
-// - mock service
-// - mock service calls
+describe('Tests zipcode controller', () => {
+  it('getZipcode', async () => {
 
-describe.skip('Tests zipcode controller', () => {
-  it('getClosestZipcode', async () => {
-    // run through some misses before hit
-    mockDynamoService.getItem
-      .mockReturnValueOnce(mockDynamoMiss)
-      .mockReturnValueOnce(mockDynamoMiss)
-      .mockReturnValueOnce(mockDynamoMiss)
-      .mockReturnValueOnce(mockDynamoMiss)
-      .mockReturnValueOnce(mockDynamoMiss)
-      .mockReturnValueOnce(mockDynamoHit);
+    const req = getMockReq({params: {value: "10001}"}});
 
-    const result = await getClosestZipcode('10');
+    await getZipcode(req, res, next);
 
-    expect(result).toBe(mockDynamoHit.Items);
+    expect(res.json).toHaveBeenLastCalledWith(
+      expect.objectContaining([{foo: 'bar'}])
+    )
   });
 });
