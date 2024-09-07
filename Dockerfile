@@ -16,5 +16,7 @@ ENV SERVICES=dynamodb
 ENV AWS_ACCESS_KEY_ID=dummy
 ENV AWS_SECRET_ACCESS_KEY=dummy
 COPY init_dynamodb.sh /etc/localstack/init/ready.d/init-aws.sh
+RUN curl -L https://github.com/climate-cooperative/home-energy-data-manager/releases/download/latest/dynamo-entries.tgz \
+    --output /etc/localstack/init/ready.d/dynamo-entries.tgz
 
 ENTRYPOINT [ "bash", "-c", "npm run start:local & docker-entrypoint.sh" ]

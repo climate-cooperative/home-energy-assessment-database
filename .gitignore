@@ -4,6 +4,8 @@ node_modules/
 # Ignore build artifacts
 dist/
 build/
+/dynamo-entries.tgz
+/dynamo-entries/*
 
 # Ignore log files
 *.log
