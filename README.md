@@ -1,4 +1,4 @@
-# Home Energy Assessment Database API 🌎 [![](https://img.shields.io/badge/discord-8A2BE2)](https://discord.gg/k6TVUTyXa6)
+# Home Energy Assessment Database API 🌎 [![](https://img.shields.io/badge/discord-8A2BE2)](https://discord.com/channels/1234653337547440190)
 
 
 Welcome to the Climate Cooperative Open Source project! As a social purpose corporation, Climate Cooperative is dedicated to advancing carbon-neutral, sustainable energy solutions for homes. Our mission is to foster diverse, healthy communities by providing innovative and accessible energy efficiency tools and services.
