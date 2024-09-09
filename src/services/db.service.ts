@@ -1,8 +1,3 @@
-// google this shiiii
-// export interface KeyFieldQuery {
-//     : string;
-// }
-
 // interface for agnostic db access
 export interface DbService {
   getItemById: (table: string, id: string) => Promise<any>;
