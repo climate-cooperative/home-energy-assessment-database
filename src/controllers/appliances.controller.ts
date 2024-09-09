@@ -1,12 +1,9 @@
-import { DynamoService } from '../services/dynamo.service';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { APPLIANCE_TABLE } from '../constants/tables';
-import { DYNAMO_ENDPOINT } from '../constants/routes';
 import { NextFunction, Request, Response } from 'express';
+import { container, TYPES } from '../config/inversify.config';
+import { DbService } from '../services/db.service';
 
-const dynamoService = new DynamoService(
-  new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
-);
+const dbService = container.get<DbService>(TYPES.DB_CLIENT);
 
 // GET /appliances
 export const getAllAppliances = async (
@@ -15,8 +12,8 @@ export const getAllAppliances = async (
   next: NextFunction,
 ) => {
   try {
-    const applainces = await dynamoService.getAll(APPLIANCE_TABLE);
-    res.json(applainces.Items);
+    const applainces = await dbService.getAllItems(APPLIANCE_TABLE);
+    res.json(applainces);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
@@ -29,10 +26,10 @@ export const getAppliance = async (
   next: NextFunction,
 ) => {
   try {
-    const applaince = await dynamoService.getItem(APPLIANCE_TABLE, {
+    const applaince = await dbService.getItem(APPLIANCE_TABLE, {
       appliance: req.params.name,
     });
-    res.json(applaince.Items);
+    res.json(applaince);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }

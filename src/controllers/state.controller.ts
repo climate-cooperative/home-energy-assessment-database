@@ -1,13 +1,10 @@
-import { DynamoService } from '../services/dynamo.service';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { STATE_TABLE, ZIPCODE_TABLE } from '../constants/tables';
-import { ZIPCODE_GSI } from '../constants/indexes';
-import { DYNAMO_ENDPOINT } from '../constants/routes';
 import { NextFunction, Request, Response } from 'express';
+import { container, TYPES } from '../config/inversify.config';
+import { DbService } from '../services/db.service';
+import { ZipcodeModel } from '../models/zipcode.model';
 
-const dynamoService = new DynamoService(
-  new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
-);
+const dbService = container.get<DbService>(TYPES.DB_CLIENT);
 
 // GET /state
 export const getAllStates = async (
@@ -16,8 +13,8 @@ export const getAllStates = async (
   next: NextFunction,
 ) => {
   try {
-    const states = await dynamoService.getAll(STATE_TABLE);
-    res.json(states.Items);
+    const states = await dbService.getAllItems(STATE_TABLE);
+    res.json(states);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
@@ -30,10 +27,10 @@ export const getState = async (
   next: NextFunction,
 ) => {
   try {
-    const state = await dynamoService.getItem(STATE_TABLE, {
+    const state = await dbService.getItem(STATE_TABLE, {
       state: req.params.name,
     });
-    res.json(state.Items);
+    res.json(state);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
@@ -46,18 +43,18 @@ export const getStateFromZipCode = async (
   next: NextFunction,
 ) => {
   try {
-    const zipcode = await dynamoService.getItemGSI(ZIPCODE_TABLE, ZIPCODE_GSI, {
+    const zipcode = (await dbService.getItem(ZIPCODE_TABLE, {
       zipcode: req.params.zipcode,
-    });
-    if (!zipcode.Items) {
+    })) as ZipcodeModel[];
+    if (!zipcode) {
       res.json([]);
       return;
     }
-    const stateAbbreviation = zipcode.Items[0].state;
-    const state = await dynamoService.getItem(STATE_TABLE, {
+    const stateAbbreviation = zipcode[0].state;
+    const state = await dbService.getItem(STATE_TABLE, {
       abbreviation: stateAbbreviation,
     });
-    res.json(state.Items);
+    res.json(state);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }

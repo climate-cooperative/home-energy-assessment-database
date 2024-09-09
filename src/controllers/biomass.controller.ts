@@ -1,12 +1,9 @@
-import { DynamoService } from '../services/dynamo.service';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { BIOMASS_TABLE } from '../constants/tables';
-import { DYNAMO_ENDPOINT } from '../constants/routes';
 import { NextFunction, Request, Response } from 'express';
+import { container, TYPES } from '../config/inversify.config';
+import { DbService } from '../services/db.service';
 
-const dynamoService = new DynamoService(
-  new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
-);
+const dbService = container.get<DbService>(TYPES.DB_CLIENT);
 
 // GET /biomass
 export const getAllBiomass = async (
@@ -15,8 +12,8 @@ export const getAllBiomass = async (
   next: NextFunction,
 ) => {
   try {
-    const biomasses = await dynamoService.getAll(BIOMASS_TABLE);
-    res.json(biomasses.Items);
+    const biomasses = await dbService.getAllItems(BIOMASS_TABLE);
+    res.json(biomasses);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
@@ -29,10 +26,10 @@ export const getBiomass = async (
   next: NextFunction,
 ) => {
   try {
-    const biomass = await dynamoService.getItem(BIOMASS_TABLE, {
+    const biomass = await dbService.getItem(BIOMASS_TABLE, {
       name: req.params.name,
     });
-    res.json(biomass.Items);
+    res.json(biomass);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }

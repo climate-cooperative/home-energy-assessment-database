@@ -1,12 +1,9 @@
-import { DynamoService } from '../services/dynamo.service';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { HOME_TYPE_TABLE } from '../constants/tables';
-import { DYNAMO_ENDPOINT } from '../constants/routes';
 import { NextFunction, Request, Response } from 'express';
+import { container, TYPES } from '../config/inversify.config';
+import { DbService } from '../services/db.service';
 
-const dynamoService = new DynamoService(
-  new DynamoDBClient({ region: 'us-west-2', endpoint: DYNAMO_ENDPOINT }),
-);
+const dbService = container.get<DbService>(TYPES.DB_CLIENT);
 
 // GET /home_type
 export const getAllHomeTypes = async (
@@ -15,8 +12,8 @@ export const getAllHomeTypes = async (
   next: NextFunction,
 ) => {
   try {
-    const homeTypes = await dynamoService.getAll(HOME_TYPE_TABLE);
-    res.json(homeTypes.Items);
+    const homeTypes = await dbService.getAllItems(HOME_TYPE_TABLE);
+    res.json(homeTypes);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
@@ -29,10 +26,10 @@ export const getHomeType = async (
   next: NextFunction,
 ) => {
   try {
-    const homeType = await dynamoService.getItem(HOME_TYPE_TABLE, {
+    const homeType = await dbService.getItem(HOME_TYPE_TABLE, {
       home_type: req.params.type,
     });
-    res.json(homeType.Items);
+    res.json(homeType);
   } catch (err) {
     res.status(500).json({ message: (err as Error).message });
   }
