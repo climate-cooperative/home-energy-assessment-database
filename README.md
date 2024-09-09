@@ -6,6 +6,7 @@ The primary goal of the Home Energy Assessment Database API is to consolidate di
 
 This platform seeks to empower climate tech startups, academic researchers, and other stakeholders with the data necessary to innovate, study, and propose solutions aimed at reducing residential energy consumption and its environmental impact. By providing a comprehensive and easily accessible API, the project aspires to catalyze advancements in home energy efficiency, support policy development, and contribute to a more sustainable future.
 
+
 ## Climate Cooperative Integration
 
 The Home Energy Assessmant Database acts as the RESTful API for the [home-energy calculator](https://github.com/climate-cooperative/home-energy-calculator), [hvac controller(future)](https://github.com/climate-cooperative/hvac-savings-calculator), and the [heat pump water heater savings calculator(future)](https://github.com/climate-cooperative/heat-pump-water-heater-savings-calculator).
@@ -16,13 +17,11 @@ The future purpose for this service is to act as the middle man between a datase
 
 *Make sure you have docker running locally*
 
-**Lets keep this simple.**
-
-**`./start_local.sh`**
-
-## Environment Setup
+### Environment Setup
 
 Follow the steps provided in the [env-setup doc](./help/env-setup.md).
+
+**`./start_local.sh`**
 
 ### Database Connection
 
@@ -42,10 +41,16 @@ Want to get involved? Take a look at our [CONTRIBUTING DOC](./CONTRIBUTING.md)
 
 - [node.js](https://nodejs.org/en)
 - [express.js](https://expressjs.com/)
+- [inversify.js](https://inversify.io/)
 
 ### DATABASE ACCESS
 
 - [aws-sdkv3: dynamoDB](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/)
+
+### Testing
+
+- [Jest](https://jestjs.io/)
+- 
 
 ## Climate Cooperative 🌎
 

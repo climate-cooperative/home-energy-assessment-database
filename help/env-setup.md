@@ -14,22 +14,22 @@ Proceed to the following section to specific setup.
 
 Ideally utilize AWS security best practices for inheriting AWS credentials.
 
-Add and configure the following to your `.env` file
+Add and configure the following to your `.env` file or environemnt variables
 
-```
-DATA_SOURCE=DYNAMODB
+```(shell)
+DATA_SOURCE=DYNAMODB    # let app know to configure for dynamodb data source
+
+AWS_DYNAMO_ENDPOINT=    # configure aws endpoint. [aws docs](https://docs.aws.amazon.com/general/latest/gr/ddb.html)
 
 ```
 
 ### Optional Config
 
-```
-AWS_ENDPOINT= // override aws client endpoints. primarily for testing and local dev.
-
-// indexes
-// currently only 1 index is supported
-DYNAMO_INDEX_TABLE= // table where index lives
-DYNAMO_INDEX_COLS= // columns included in index. comma seperated list
-DYNAMO_INDEX_NAME= // name of index
+```(shell)
+# indexes
+# currently only 1 index is supported
+DYNAMO_INDEX_TABLE=     # table where index lives
+DYNAMO_INDEX_COLS=      # columns included in index. comma seperated list
+DYNAMO_INDEX_NAME=      # name of index
 ```
 
